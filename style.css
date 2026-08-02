@@ -182,8 +182,8 @@ footer hr{
     display:inline-block;
     padding:15px 40px;
     border-radius:40px;
-    background:#00cfff;
-    color:white;
+    background-size: contain;
+    background-color:#000;
     text-decoration:none;
     font-weight:bold;
     box-shadow:0 0 20px #00cfff;
