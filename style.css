@@ -149,3 +149,42 @@ footer hr{
     font-weight:bold;
     font-size:26px;
 }
+.hero{
+    height:80vh;
+    background:
+        linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.7)),
+        url("images/banner.jpg") center/cover no-repeat;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.hero h1{
+    color:#00cfff;
+    font-size:64px;
+    text-shadow:0 0 25px #00cfff;
+}
+
+.hero p{
+    color:white;
+    font-size:24px;
+    margin:20px 0;
+}
+
+.btn-main{
+    display:inline-block;
+    padding:15px 40px;
+    border-radius:40px;
+    background:#00cfff;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    box-shadow:0 0 20px #00cfff;
+    transition:.3s;
+}
+
+.btn-main:hover{
+    transform:scale(1.08);
+}
