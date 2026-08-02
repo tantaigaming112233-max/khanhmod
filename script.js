@@ -10,3 +10,10 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         });
     });
 });
+function openPopup(){
+    document.getElementById("paymentPopup").style.display="block";
+}
+
+function closePopup(){
+    document.getElementById("paymentPopup").style.display="none";
+}
