@@ -17,3 +17,10 @@ function openPopup(){
 function closePopup(){
     document.getElementById("paymentPopup").style.display="none";
 }
+function openNapTien(){
+    document.getElementById("napTienPopup").style.display="block";
+}
+
+function closeNapTien(){
+    document.getElementById("napTienPopup").style.display="none";
+}
