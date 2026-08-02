@@ -193,3 +193,14 @@ footer hr{
 .btn-main:hover{
     transform:scale(1.08);
 }
+.notice{
+    background:#00cfff;
+    color:#000;
+    padding:10px;
+    font-weight:bold;
+    box-shadow:0 0 10px #00cfff;
+}
+
+.notice marquee{
+    font-size:16px;
+}
