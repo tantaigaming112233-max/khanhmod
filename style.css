@@ -152,8 +152,13 @@ footer hr{
 .hero{
     height:80vh;
     background:
-        linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.7)),
-        url("images/banner.jpg") center/cover no-repeat;
+        linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.7)),
+        url("images/banner.png") center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
 
     display:flex;
     justify-content:center;
