@@ -1,0 +1,141 @@
+/* ===== KhánhMod Premium ===== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#0b0b0b;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+}
+
+/* ===== Navbar ===== */
+
+.navbar{
+    background:#111 !important;
+    box-shadow:0 0 15px rgba(0,255,255,.15);
+}
+
+.navbar-brand{
+    font-size:28px;
+    font-weight:bold;
+    color:#00d9ff !important;
+}
+
+.nav-link{
+    color:#fff !important;
+    transition:.3s;
+}
+
+.nav-link:hover{
+    color:#00d9ff !important;
+}
+
+/* ===== Banner ===== */
+
+.hero{
+    padding:120px 20px;
+    text-align:center;
+    background:linear-gradient(135deg,#050505,#101010);
+}
+
+.hero h1{
+    font-size:56px;
+    color:#00d9ff;
+    text-shadow:0 0 20px #00d9ff;
+}
+
+.hero p{
+    color:#bbb;
+    margin-top:15px;
+    font-size:20px;
+}
+
+/* ===== Nút ===== */
+
+.btn-info{
+    background:#00d9ff;
+    border:none;
+    color:#fff;
+    font-weight:bold;
+    border-radius:50px;
+    transition:.3s;
+}
+
+.btn-info:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 25px #00d9ff;
+}
+
+/* ===== Sản phẩm ===== */
+
+.product-card{
+    background:#181818;
+    border:1px solid #00d9ff;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.product-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 0 30px rgba(0,217,255,.45);
+}
+
+.product-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.product-card h4{
+    color:#00d9ff;
+}
+
+.price{
+    color:#00d9ff;
+    font-size:30px;
+    font-weight:bold;
+}
+
+/* ===== Footer ===== */
+
+footer{
+    margin-top:80px;
+    background:#111;
+}
+
+footer hr{
+    border-color:#333;
+}
+
+/* ===== Responsive ===== */
+
+@media(max-width:768px){
+
+.hero{
+    padding:70px 20px;
+}
+
+.hero h1{
+    font-size:38px;
+}
+
+.hero p{
+    font-size:16px;
+}
+
+.navbar-brand{
+    font-size:22px;
+}
+
+.price{
+    font-size:24px;
+}
+
+}
