@@ -612,7 +612,22 @@ function confirmBuy() {
         "khanhmod_user",
         JSON.stringify(user)
     );
+// Lưu lịch sử đơn hàng
+const orders = JSON.parse(
+    localStorage.getItem("khanhmod_orders") || "[]"
+);
 
+orders.unshift({
+    product: selectedProduct,
+    price: selectedPrice,
+    time: new Date().toLocaleString("vi-VN"),
+    status: "Đã thanh toán"
+});
+
+localStorage.setItem(
+    "khanhmod_orders",
+    JSON.stringify(orders)
+);
     closePopup();
 
     alert(
