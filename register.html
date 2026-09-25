@@ -1,62 +1,7 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tạo tài khoản</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-body{
-background:#111;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.box{
-width:360px;
-background:#1b1b1b;
-padding:25px;
-border-radius:15px;
-border:2px solid #00cfff;
-color:white;
-}
-
-h2{
-text-align:center;
-color:#00cfff;
-margin-bottom:20px;
-}
-</style>
-
-</head>
-
-<body>
-
-<div class="box">
-
-<h2>Tạo tài khoản</h2>
-
-<input class="form-control mb-3" placeholder="Tên đăng nhập">
-
-<input class="form-control mb-3" type="password" placeholder="Mật khẩu">
-
-<input class="form-control mb-3" type="password" placeholder="Nhập lại mật khẩu">
-
-<button class="btn btn-info w-100">
-Đăng ký
-</button>
-
-<br><br>
-
-<a href="login.html" class="btn btn-secondary w-100">
-Quay lại đăng nhập
-</a>
-
-</div>
-
-</body>
-</html>
+<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tạo tài khoản - KhánhMod</title><link rel="stylesheet" href="account.css"></head><body>
+<nav class="nav"><div class="nav-inner"><a class="brand" href="index.html"><img src="images/logo.png">KhánhMod</a><div class="links"><a href="index.html">Trang chủ</a><a href="login.html">Đăng nhập</a></div></div></nav>
+<main class="page"><div class="container"><h1 class="title">Tạo tài khoản</h1><p class="subtitle">Tạo tài khoản để quản lý số dư và đơn hàng</p>
+<div class="panel form-panel"><label>Tên hiển thị</label><input id="name" placeholder="Ví dụ: Văn Khánh"><label>Tên đăng nhập</label><input id="username" placeholder="Ví dụ: khanhmod"><label>Mật khẩu</label><input id="password" type="password" placeholder="Ít nhất 6 ký tự"><label>Nhập lại mật khẩu</label><input id="password2" type="password" placeholder="Nhập lại mật khẩu"><div id="error" class="error"></div><div id="success" class="success"></div><button class="btn btn-primary full" onclick="register()">Tạo tài khoản</button><p class="small">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p><div class="note">Tài khoản trong bản này được lưu trên trình duyệt bằng localStorage. Đây là giao diện/demo frontend, chưa phải hệ thống tài khoản có máy chủ.</div></div></div></main>
+<script>
+function register(){const n=name.value.trim(),u=username.value.trim(),p=password.value,p2=password2.value,e=error,s=success;if(!n||!u||!p||!p2){e.textContent='Vui lòng nhập đầy đủ thông tin.';e.style.display='block';s.style.display='none';return}if(p.length<6){e.textContent='Mật khẩu phải có ít nhất 6 ký tự.';e.style.display='block';s.style.display='none';return}if(p!==p2){e.textContent='Mật khẩu nhập lại không khớp.';e.style.display='block';s.style.display='none';return}localStorage.setItem('khanhmod_user',JSON.stringify({name:n,username:u,password:p,balance:0}));localStorage.removeItem('khanhmod_logged');e.style.display='none';s.textContent='Tạo tài khoản thành công. Đang chuyển sang đăng nhập...';s.style.display='block';setTimeout(()=>location.href='login.html',800)}
+</script></body></html>
