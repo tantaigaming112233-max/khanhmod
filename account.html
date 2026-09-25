@@ -2,7 +2,13 @@
 <nav class="nav"><div class="nav-inner"><a class="brand" href="index.html"><img src="images/logo.png">KhánhMod</a><div class="links"><a href="index.html">Trang chủ</a><a href="#" onclick="logout()">Đăng xuất</a></div></div></nav>
 <main class="page"><div class="container"><h1 class="title">Tài khoản của tôi</h1><p class="subtitle">Quản lý thông tin và số dư</p>
 <div class="account-grid"><div class="panel profile"><div class="avatar" id="avatar">K</div><h2 id="name">KhánhMod</h2><p class="muted">@<span id="username"></span></p><div class="balance" id="balance">0đ</div><p class="muted">Số dư tài khoản</p><div class="actions" style="justify-content:center"><button class="btn btn-yellow" onclick="openTopup()">💰 Nạp tiền</button><a class="btn btn-dark" href="index.html#products">🛒 Mua sản phẩm</a></div></div>
-<div class="panel"><h2>Thông tin tài khoản</h2><div class="info-row"><span>Tên hiển thị</span><b id="infoName"></b></div><div class="info-row"><span>Tên đăng nhập</span><b id="infoUsername"></b></div><div class="info-row"><span>Số dư</span><b id="infoBalance"></b></div><div class="note">Lưu ý: số dư ở phiên bản này chỉ là số dư demo được lưu trên trình duyệt. Không nên dùng nó cho thanh toán thật.</div></div></div></div></main>
+<div class="panel"><h2>Thông tin tài khoản</h2><div class="info-row"><span>Tên hiển thị</span><b id="infoName"></b></div><div class="info-row"><span>Tên đăng nhập</span><b id="infoUsername"></b></div><div class="info-row"><span>Số dư</span><b id="infoBalance"></b></div><div class="note">Lưu ý: số dư ở phiên bản này chỉ là số dư demo được lưu trên trình duyệt. Không nên dùng nó cho thanh toán thật.</div></div></div></div><div class="panel" style="margin-top:20px;">
+    <h2>🛒 Lịch sử đơn hàng</h2>
+
+    <div id="orderHistory">
+        <p class="muted">Chưa có đơn hàng nào.</p>
+    </div>
+</div></main>
 <div id="topup" class="modal" onclick="outside(event)">
     <div class="modal-box">
 
