@@ -148,5 +148,53 @@ function confirmTopup() {
 }
 
 
-render();
+render();function renderOrders() {
+    const box = document.getElementById("orderHistory");
+
+    if (!box) return;
+
+    const orders = JSON.parse(
+        localStorage.getItem("khanhmod_orders") || "[]"
+    );
+
+    if (orders.length === 0) {
+        box.innerHTML = "<p>Chưa có đơn hàng nào.</p>";
+        return;
+    }
+
+    box.innerHTML = orders.map(function(order, index) {
+        return `
+            <div style="
+                padding:15px;
+                margin-bottom:12px;
+                border:1px solid rgba(0,255,255,.25);
+                border-radius:12px;
+                background:rgba(255,255,255,.03);
+            ">
+                <div style="font-size:18px;font-weight:bold;">
+                    🛍️ ${order.product}
+                </div>
+
+                <div style="margin-top:6px;">
+                    💰 Giá: 
+                    <b>${Number(order.price).toLocaleString("vi-VN")}đ</b>
+                </div>
+
+                <div style="margin-top:6px;">
+                    🕐 ${order.time}
+                </div>
+
+                <div style="
+                    margin-top:8px;
+                    color:#00ff99;
+                    font-weight:bold;
+                ">
+                    ✅ ${order.status}
+                </div>
+            </div>
+        `;
+    }).join("");
+}
+
+renderOrders();
 </script></body></html>
