@@ -504,17 +504,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    <script>
 
-function openNapTien() {
-    document.getElementById("napTienPopup").classList.add("show");
-}
-
-
-function closeNapTien() {
-    document.getElementById("napTienPopup").classList.remove("show");
-}
-
+let selectedProduct = "";
+let selectedPrice = 0;
 
 function getUser() {
     return JSON.parse(
@@ -522,6 +514,17 @@ function getUser() {
     );
 }
 
+function openNapTien() {
+    document
+        .getElementById("napTienPopup")
+        .classList.add("show");
+}
+
+function closeNapTien() {
+    document
+        .getElementById("napTienPopup")
+        .classList.remove("show");
+}
 
 function openPopup(productName) {
 
@@ -532,38 +535,28 @@ function openPopup(productName) {
         !user
     ) {
         alert("Vui lòng đăng nhập trước khi mua sản phẩm.");
-
         window.location.href = "login.html";
-
         return;
     }
 
-
-    let price = 0;
-
+    selectedProduct = productName;
 
     if (productName === "Proxy ShinMod") {
-        price = 99000;
+        selectedPrice = 99000;
+    } else if (productName === "MTH Proxy") {
+        selectedPrice = 99000;
+    } else if (productName === "Fake Lag") {
+        selectedPrice = 3000000;
     }
-
-    else if (productName === "MTH Proxy") {
-        price = 99000;
-    }
-
-    else if (productName === "Fake Lag") {
-        price = 3000000;
-    }
-
 
     document.getElementById("selectedProduct").textContent =
-        productName +
-        " - Giá: " +
-        price.toLocaleString("vi-VN") +
+        "Sản phẩm: " +
+        selectedProduct +
+        " | Giá: " +
+        selectedPrice.toLocaleString("vi-VN") +
         "đ";
 
-
     document.getElementById("paymentPopup").classList.add("show");
-
 
     const oldButton =
         document.getElementById("buyWithBalance");
@@ -572,53 +565,40 @@ function openPopup(productName) {
         oldButton.remove();
     }
 
-
     const button = document.createElement("button");
 
     button.id = "buyWithBalance";
-
+    button.type = "button";
     button.className = "btn-buy mt-3";
-
     button.textContent = "💰 Mua bằng số dư";
 
-
-    button.onclick = function() {
-        buyProduct(productName, price);
-    };
-
+    button.onclick = confirmBuy;
 
     document
         .querySelector("#paymentPopup .popup-box")
         .appendChild(button);
 }
 
-
-function buyProduct(productName, price) {
+function confirmBuy() {
 
     const user = getUser();
 
-
     if (!user) {
-
         alert("Bạn chưa đăng nhập.");
-
         window.location.href = "login.html";
-
         return;
     }
 
-
     const balance = Number(user.balance || 0);
 
-
-    if (balance < price) {
+    if (balance < selectedPrice) {
 
         alert(
-            "Số dư không đủ.\n\n" +
-            "Giá sản phẩm: " +
-            price.toLocaleString("vi-VN") +
+            "❌ Số dư không đủ!\n\n" +
+            "Giá: " +
+            selectedPrice.toLocaleString("vi-VN") +
             "đ\n" +
-            "Số dư hiện tại: " +
+            "Số dư: " +
             balance.toLocaleString("vi-VN") +
             "đ"
         );
@@ -626,26 +606,22 @@ function buyProduct(productName, price) {
         return;
     }
 
-
-    user.balance = balance - price;
-
+    user.balance = balance - selectedPrice;
 
     localStorage.setItem(
         "khanhmod_user",
         JSON.stringify(user)
     );
 
-
     closePopup();
 
-
     alert(
-        "🎉 Mua hàng thành công!\n\n" +
+        "✅ Mua hàng thành công!\n\n" +
         "Sản phẩm: " +
-        productName +
+        selectedProduct +
         "\n" +
         "Đã trừ: " +
-        price.toLocaleString("vi-VN") +
+        selectedPrice.toLocaleString("vi-VN") +
         "đ\n" +
         "Số dư còn lại: " +
         user.balance.toLocaleString("vi-VN") +
@@ -653,37 +629,30 @@ function buyProduct(productName, price) {
     );
 }
 
-
 function closePopup() {
     document
         .getElementById("paymentPopup")
         .classList.remove("show");
 }
 
-
 function closeOnOutside(event, popupId) {
 
     if (event.target.id === popupId) {
-
         document
             .getElementById(popupId)
             .classList.remove("show");
     }
 }
 
-
 document.addEventListener("keydown", function(event) {
 
     if (event.key === "Escape") {
-
         closeNapTien();
-
         closePopup();
     }
 
 });
 
-</script>
 </script>
 
 </body>
