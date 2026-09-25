@@ -3,7 +3,68 @@
 <main class="page"><div class="container"><h1 class="title">Tài khoản của tôi</h1><p class="subtitle">Quản lý thông tin và số dư</p>
 <div class="account-grid"><div class="panel profile"><div class="avatar" id="avatar">K</div><h2 id="name">KhánhMod</h2><p class="muted">@<span id="username"></span></p><div class="balance" id="balance">0đ</div><p class="muted">Số dư tài khoản</p><div class="actions" style="justify-content:center"><button class="btn btn-yellow" onclick="openTopup()">💰 Nạp tiền</button><a class="btn btn-dark" href="index.html#products">🛒 Mua sản phẩm</a></div></div>
 <div class="panel"><h2>Thông tin tài khoản</h2><div class="info-row"><span>Tên hiển thị</span><b id="infoName"></b></div><div class="info-row"><span>Tên đăng nhập</span><b id="infoUsername"></b></div><div class="info-row"><span>Số dư</span><b id="infoBalance"></b></div><div class="note">Lưu ý: số dư ở phiên bản này chỉ là số dư demo được lưu trên trình duyệt. Không nên dùng nó cho thanh toán thật.</div></div></div></div></main>
-<div id="topup" class="modal" onclick="outside(event)"><div class="modal-box"><span class="close" onclick="closeTopup()">×</span><h2 class="title" style="font-size:25px">💰 Nạp tiền</h2><img class="qr" src="images/qr.png" alt="QR thanh toán"><p>Quét mã QR để chuyển khoản.</p><p><b>MB Bank</b></p><p>Số tài khoản: <b>57509092008</b></p><p>Chuyển khoản xong, liên hệ Admin qua Zalo để xác nhận.</p><a class="btn btn-primary" href="https://zalo.me/0398247095" target="_blank">💬 Liên hệ Zalo</a></div></div>
+<div id="topup" class="modal" onclick="outside(event)"><div id="topup" class="modal" onclick="outside(event)">
+    <div class="modal-box">
+
+        <span class="close" onclick="closeTopup()">×</span>
+
+        <h2 class="title" style="font-size:25px">
+            💰 Nạp tiền
+        </h2>
+
+        <img
+            class="qr"
+            src="images/qr.png"
+            alt="QR thanh toán"
+        >
+
+        <p>Quét mã QR để chuyển khoản.</p>
+
+        <p>
+            <b>MB Bank</b>
+        </p>
+
+        <p>
+            Số tài khoản:
+            <b>57509092008</b>
+        </p>
+
+        <label for="topupAmount">
+            Số tiền muốn nạp
+        </label>
+
+        <input
+            id="topupAmount"
+            type="number"
+            min="1000"
+            step="1000"
+            placeholder="Ví dụ: 100000"
+        >
+
+        <div
+            id="topupError"
+            class="error"
+            style="display:none"
+        ></div>
+
+        <button
+            class="btn btn-yellow full"
+            onclick="confirmTopup()"
+        >
+            ✅ Xác nhận nạp
+        </button>
+
+        <a
+            class="btn btn-primary full"
+            href="https://zalo.me/0398247095"
+            target="_blank"
+            rel="noopener"
+        >
+            💬 Liên hệ Zalo
+        </a>
+
+    </div>
+</div></div>
 <script>
 function getUser(){return JSON.parse(localStorage.getItem('khanhmod_user')||'null')}
 function render(){if(localStorage.getItem('khanhmod_logged')!=='1'||!getUser()){location.href='login.html';return}const u=getUser();document.getElementById('name').textContent=u.name;document.getElementById('username').textContent=u.username;document.getElementById('avatar').textContent=(u.name||'K').charAt(0).toUpperCase();document.getElementById('balance').textContent=Number(u.balance||0).toLocaleString('vi-VN')+'đ';document.getElementById('infoName').textContent=u.name;document.getElementById('infoUsername').textContent=u.username;document.getElementById('infoBalance').textContent=Number(u.balance||0).toLocaleString('vi-VN')+'đ'}
