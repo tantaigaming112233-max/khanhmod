@@ -69,5 +69,84 @@
 function getUser(){return JSON.parse(localStorage.getItem('khanhmod_user')||'null')}
 function render(){if(localStorage.getItem('khanhmod_logged')!=='1'||!getUser()){location.href='login.html';return}const u=getUser();document.getElementById('name').textContent=u.name;document.getElementById('username').textContent=u.username;document.getElementById('avatar').textContent=(u.name||'K').charAt(0).toUpperCase();document.getElementById('balance').textContent=Number(u.balance||0).toLocaleString('vi-VN')+'đ';document.getElementById('infoName').textContent=u.name;document.getElementById('infoUsername').textContent=u.username;document.getElementById('infoBalance').textContent=Number(u.balance||0).toLocaleString('vi-VN')+'đ'}
 function logout(){localStorage.removeItem('khanhmod_logged');location.href='login.html'}
-function openTopup(){document.getElementById('topup').classList.add('show')}function closeTopup(){document.getElementById('topup').classList.remove('show')}function outside(e){if(e.target.id==='topup')closeTopup()}render();
+function openTopup() {
+    document.getElementById("topup").classList.add("show");
+
+    document.getElementById("topupAmount").value = "";
+    document.getElementById("topupError").style.display = "none";
+}
+
+
+function closeTopup() {
+    document.getElementById("topup").classList.remove("show");
+}
+
+
+function outside(event) {
+    if (event.target.id === "topup") {
+        closeTopup();
+    }
+}
+
+
+function confirmTopup() {
+
+    const amountInput =
+        document.getElementById("topupAmount");
+
+    const error =
+        document.getElementById("topupError");
+
+    const amount =
+        Number(amountInput.value);
+
+    error.style.display = "none";
+
+
+    if (!amount || amount < 1000) {
+
+        error.textContent =
+            "Vui lòng nhập số tiền từ 1.000đ trở lên.";
+
+        error.style.display = "block";
+
+        return;
+    }
+
+
+    const user = getUser();
+
+
+    if (!user) {
+
+        window.location.href = "login.html";
+
+        return;
+    }
+
+
+    user.balance =
+        Number(user.balance || 0) + amount;
+
+
+    localStorage.setItem(
+        "khanhmod_user",
+        JSON.stringify(user)
+    );
+
+
+    render();
+
+    closeTopup();
+
+
+    alert(
+        "Nạp tiền demo thành công: " +
+        amount.toLocaleString("vi-VN") +
+        "đ"
+    );
+}
+
+
+render();
 </script></body></html>
