@@ -1,157 +1,254 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tài khoản - KhánhMod</title>
-    <link rel="stylesheet" href="account.css">
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Tài khoản - KhánhMod</title>
+
+<link
+    rel="stylesheet"
+    href="account.css"
+>
+```
+
 </head>
 
 <body>
 
 <nav class="nav">
-    <div class="nav-inner">
 
-        <a class="brand" href="index.html">
-            <img src="images/logo.png" alt="KhánhMod">
-            KhánhMod
+```
+<div class="nav-inner">
+
+    <a
+        class="brand"
+        href="index.html"
+    >
+
+        <img
+            src="images/logo.png"
+            alt="KhánhMod"
+        >
+
+        KhánhMod
+
+    </a>
+
+
+    <div class="links">
+
+        <a href="index.html">
+            Trang chủ
         </a>
 
-        <div class="links">
-            <a href="index.html">Trang chủ</a>
 
-            <a href="#" onclick="logout(); return false;">
-                Đăng xuất
-            </a>
-        </div>
+        <a
+            href="#"
+            onclick="logout(); return false;"
+        >
+            Đăng xuất
+        </a>
 
     </div>
-</nav>
 
+</div>
+```
+
+</nav>
 
 <main class="page">
 
-    <div class="container">
-
-        <h1 class="title">
-            Tài khoản của tôi
-        </h1>
-
-        <p class="subtitle">
-            Quản lý thông tin và số dư
-        </p>
+```
+<div class="container">
 
 
-        <div class="account-grid">
-
-            <!-- THÔNG TIN TÀI KHOẢN -->
-
-            <div class="panel profile">
-
-                <div class="avatar" id="avatar">
-                    K
-                </div>
-
-                <h2 id="name">
-                    KhánhMod
-                </h2>
-
-                <p class="muted">
-                    @<span id="username"></span>
-                </p>
-
-                <div class="balance" id="balance">
-                    0đ
-                </div>
-
-                <p class="muted">
-                    Số dư tài khoản
-                </p>
+    <h1 class="title">
+        Tài khoản của tôi
+    </h1>
 
 
-                <div
-                    class="actions"
-                    style="justify-content:center"
-                >
+    <p class="subtitle">
+        Quản lý thông tin và số dư
+    </p>
 
-                    <button
-                        class="btn btn-yellow"
-                        onclick="openTopup()"
-                    >
-                        💰 Nạp tiền
-                    </button>
 
-                    <a
-                        class="btn btn-dark"
-                        href="index.html#products"
-                    >
-                        🛒 Mua sản phẩm
-                    </a>
 
-                </div>
+    <div class="account-grid">
 
+
+        <!-- =========================
+             THÔNG TIN TÀI KHOẢN
+        ========================== -->
+
+        <div class="panel profile">
+
+
+            <div
+                class="avatar"
+                id="avatar"
+            >
+                K
             </div>
 
 
-            <!-- CHI TIẾT -->
-
-            <div class="panel">
-
-                <h2>
-                    Thông tin tài khoản
-                </h2>
-
-                <div class="info-row">
-                    <span>Tên hiển thị</span>
-                    <b id="infoName"></b>
-                </div>
-
-                <div class="info-row">
-                    <span>Tên đăng nhập</span>
-                    <b id="infoUsername"></b>
-                </div>
-
-                <div class="info-row">
-                    <span>Số dư</span>
-                    <b id="infoBalance"></b>
-                </div>
-
-                <div class="note">
-                    Số dư hiện là số dư demo.
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- LỊCH SỬ ĐƠN HÀNG -->
-
-        <div
-            class="panel"
-            style="margin-top:20px"
-        >
-
-            <h2>
-                🛒 Lịch sử đơn hàng
+            <h2 id="name">
+                KhánhMod
             </h2>
 
-            <div id="orderHistory">
 
-                <p class="muted">
-                    Chưa có đơn hàng nào.
-                </p>
+            <p class="muted">
+
+                @<span id="username"></span>
+
+            </p>
+
+
+            <div
+                class="balance"
+                id="balance"
+            >
+                0đ
+            </div>
+
+
+            <p class="muted">
+                Số dư tài khoản
+            </p>
+
+
+
+            <div
+                class="actions"
+                style="justify-content:center"
+            >
+
+
+                <button
+                    class="btn btn-yellow"
+                    onclick="openTopup()"
+                >
+                    💰 Nạp tiền
+                </button>
+
+
+                <a
+                    class="btn btn-dark"
+                    href="index.html#products"
+                >
+                    🛒 Mua sản phẩm
+                </a>
+
 
             </div>
 
+
         </div>
+
+
+
+        <!-- =========================
+             CHI TIẾT TÀI KHOẢN
+        ========================== -->
+
+        <div class="panel">
+
+
+            <h2>
+                Thông tin tài khoản
+            </h2>
+
+
+            <div class="info-row">
+
+                <span>
+                    Tên hiển thị
+                </span>
+
+                <b id="infoName"></b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    Tên đăng nhập
+                </span>
+
+                <b id="infoUsername"></b>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    Số dư
+                </span>
+
+                <b id="infoBalance"></b>
+
+            </div>
+
+
+            <div class="note">
+
+                Số dư được đồng bộ với hệ thống tài khoản.
+
+            </div>
+
+
+        </div>
+
 
     </div>
 
+
+
+    <!-- =========================
+         LỊCH SỬ ĐƠN HÀNG
+    ========================== -->
+
+    <div
+        class="panel"
+        style="margin-top:20px"
+    >
+
+
+        <h2>
+            🛒 Lịch sử đơn hàng
+        </h2>
+
+
+        <div id="orderHistory">
+
+            <p class="muted">
+                Chưa có đơn hàng nào.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+```
+
 </main>
 
-
-<!-- POPUP NẠP TIỀN -->
+<!-- =========================
+     POPUP NẠP TIỀN
+========================== -->
 
 <div
     id="topup"
@@ -159,147 +256,297 @@
     onclick="outside(event)"
 >
 
-    <div class="modal-box">
-
-        <span
-            class="close"
-            onclick="closeTopup()"
-        >
-            ×
-        </span>
+```
+<div class="modal-box">
 
 
-        <h2
-            class="title"
-            style="font-size:25px"
-        >
-            💰 Nạp tiền
-        </h2>
+    <span
+        class="close"
+        onclick="closeTopup()"
+    >
+        ×
+    </span>
 
 
-        <img
-            class="qr"
-            src="images/qr.png"
-            alt="QR thanh toán"
-        >
+
+    <h2
+        class="title"
+        style="font-size:25px"
+    >
+        💰 Nạp tiền
+    </h2>
 
 
-        <p>
-            Quét mã QR để chuyển khoản.
-        </p>
 
-        <p>
-            <b>MB Bank</b>
-        </p>
-
-        <p>
-            Số tài khoản:
-            <b>57509092008</b>
-        </p>
+    <img
+        class="qr"
+        src="images/qr.png"
+        alt="QR thanh toán"
+    >
 
 
-        <label for="topupAmount">
-            Số tiền muốn nạp
-        </label>
+
+    <p>
+        Quét mã QR để chuyển khoản.
+    </p>
 
 
-        <input
-            id="topupAmount"
-            type="number"
-            min="1000"
-            step="1000"
-            placeholder="Ví dụ: 100000"
-        >
+    <p>
+        <b>MB Bank</b>
+    </p>
 
 
-        <div
-            id="topupError"
-            class="error"
-            style="display:none"
-        ></div>
+    <p>
+
+        Số tài khoản:
+        <b>57509092008</b>
+
+    </p>
 
 
-        <button
-            class="btn btn-yellow full"
-            onclick="submitTopupRequest()"
-        >
-            📤 Gửi yêu cầu nạp
-        </button>
+
+    <label for="topupAmount">
+
+        Số tiền muốn nạp
+
+    </label>
 
 
-        <a
-            class="btn btn-primary full"
-            href="https://zalo.me/0398247095"
-            target="_blank"
-            rel="noopener"
-        >
-            💬 Liên hệ Zalo
-        </a>
 
-    </div>
+    <input
+        id="topupAmount"
+        type="number"
+        min="1000"
+        step="1000"
+        placeholder="Ví dụ: 100000"
+    >
+
+
+
+    <div
+        id="topupError"
+        class="error"
+        style="display:none"
+    ></div>
+
+
+
+    <button
+        class="btn btn-yellow full"
+        onclick="submitTopupRequest()"
+    >
+
+        📤 Gửi yêu cầu nạp
+
+    </button>
+
+
+
+    <a
+        class="btn btn-primary full"
+        href="https://zalo.me/0398247095"
+        target="_blank"
+        rel="noopener"
+    >
+
+        💬 Liên hệ Zalo
+
+    </a>
+
+
+</div>
+```
 
 </div>
 
-
 <script>
 
-function getUser() {
 
-    return JSON.parse(
-        localStorage.getItem("khanhmod_user") || "null"
-    );
+/* =========================
+   LẤY USER ĐANG ĐĂNG NHẬP
+========================= */
+
+function getCurrentUser() {
+
+    const current =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_user"
+            ) || "null"
+        );
+
+
+    if (!current) {
+
+        return null;
+
+    }
+
+
+    /*
+       Lấy danh sách nhiều tài khoản.
+    */
+
+    const users =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_users"
+            ) || "[]"
+        );
+
+
+    /*
+       Tìm đúng tài khoản theo username.
+    */
+
+    const found =
+        users.find(
+            function(user) {
+
+                return (
+                    user.username ===
+                    current.username
+                );
+
+            }
+        );
+
+
+    /*
+       Nếu tìm thấy trong danh sách
+       nhiều tài khoản thì dùng dữ liệu đó.
+    */
+
+    if (found) {
+
+        /*
+           Đồng bộ lại tài khoản hiện tại.
+        */
+
+        localStorage.setItem(
+            "khanhmod_user",
+            JSON.stringify(found)
+        );
+
+
+        return found;
+
+    }
+
+
+    /*
+       Tương thích tài khoản cũ.
+    */
+
+    return current;
 
 }
 
 
+
+/* =========================
+   HIỂN THỊ TÀI KHOẢN
+========================= */
+
 function render() {
 
-    const user = getUser();
+    const user =
+        getCurrentUser();
+
 
     if (
-        localStorage.getItem("khanhmod_logged") !== "1" ||
+        localStorage.getItem(
+            "khanhmod_logged"
+        ) !== "1" ||
         !user
     ) {
 
-        window.location.href = "login.html";
+        window.location.href =
+            "login.html";
 
         return;
 
     }
 
 
-    document.getElementById("name").textContent =
-        user.name;
 
-    document.getElementById("username").textContent =
-        user.username;
+    const name =
+        user.name ||
+        user.username ||
+        "KhánhMod";
 
 
-    document.getElementById("avatar").textContent =
-        (user.name || "K").charAt(0).toUpperCase();
+    const username =
+        user.username ||
+        "";
+
+
+
+    document.getElementById(
+        "name"
+    ).textContent =
+        name;
+
+
+    document.getElementById(
+        "username"
+    ).textContent =
+        username;
+
+
+    document.getElementById(
+        "avatar"
+    ).textContent =
+        name
+        .charAt(0)
+        .toUpperCase();
+
 
 
     const balance =
-        Number(user.balance || 0);
+        Number(
+            user.balance || 0
+        );
 
 
-    document.getElementById("balance").textContent =
-        balance.toLocaleString("vi-VN") + "đ";
+
+    document.getElementById(
+        "balance"
+    ).textContent =
+        balance.toLocaleString(
+            "vi-VN"
+        ) + "đ";
 
 
-    document.getElementById("infoName").textContent =
-        user.name;
+
+    document.getElementById(
+        "infoName"
+    ).textContent =
+        name;
 
 
-    document.getElementById("infoUsername").textContent =
-        user.username;
+
+    document.getElementById(
+        "infoUsername"
+    ).textContent =
+        username;
 
 
-    document.getElementById("infoBalance").textContent =
-        balance.toLocaleString("vi-VN") + "đ";
+
+    document.getElementById(
+        "infoBalance"
+    ).textContent =
+        balance.toLocaleString(
+            "vi-VN"
+        ) + "đ";
 
 }
 
+
+
+/* =========================
+   ĐĂNG XUẤT
+========================= */
 
 function logout() {
 
@@ -307,11 +554,22 @@ function logout() {
         "khanhmod_logged"
     );
 
+
+    localStorage.removeItem(
+        "khanhmod_user"
+    );
+
+
     window.location.href =
         "login.html";
 
 }
 
+
+
+/* =========================
+   MỞ POPUP
+========================= */
 
 function openTopup() {
 
@@ -327,10 +585,16 @@ function openTopup() {
 
     document
         .getElementById("topupError")
-        .style.display = "none";
+        .style.display =
+        "none";
 
 }
 
+
+
+/* =========================
+   ĐÓNG POPUP
+========================= */
 
 function closeTopup() {
 
@@ -341,10 +605,16 @@ function closeTopup() {
 }
 
 
+
+/* =========================
+   CLICK NGOÀI POPUP
+========================= */
+
 function outside(event) {
 
     if (
-        event.target.id === "topup"
+        event.target.id ===
+        "topup"
     ) {
 
         closeTopup();
@@ -354,21 +624,34 @@ function outside(event) {
 }
 
 
+
+/* =========================
+   GỬI YÊU CẦU NẠP TIỀN
+========================= */
+
 function submitTopupRequest() {
 
     const amountInput =
-        document.getElementById("topupAmount");
+        document.getElementById(
+            "topupAmount"
+        );
 
 
     const error =
-        document.getElementById("topupError");
+        document.getElementById(
+            "topupError"
+        );
 
 
     const amount =
-        Number(amountInput.value);
+        Number(
+            amountInput.value
+        );
 
 
-    error.style.display = "none";
+    error.style.display =
+        "none";
+
 
 
     if (
@@ -379,14 +662,19 @@ function submitTopupRequest() {
         error.textContent =
             "Vui lòng nhập số tiền từ 1.000đ trở lên.";
 
-        error.style.display = "block";
+
+        error.style.display =
+            "block";
+
 
         return;
 
     }
 
 
-    const user = getUser();
+
+    const user =
+        getCurrentUser();
 
 
     if (!user) {
@@ -399,12 +687,14 @@ function submitTopupRequest() {
     }
 
 
+
     const requests =
         JSON.parse(
             localStorage.getItem(
                 "khanhmod_topup_requests"
             ) || "[]"
         );
+
 
 
     requests.push({
@@ -419,9 +709,11 @@ function submitTopupRequest() {
             "Chờ Admin xác nhận",
 
         time:
-            new Date().toLocaleString("vi-VN")
+            new Date()
+            .toLocaleString("vi-VN")
 
     });
+
 
 
     localStorage.setItem(
@@ -430,18 +722,27 @@ function submitTopupRequest() {
     );
 
 
+
     closeTopup();
+
 
 
     alert(
         "Đã gửi yêu cầu nạp " +
-        amount.toLocaleString("vi-VN") +
+        amount.toLocaleString(
+            "vi-VN"
+        ) +
         "đ.\n\n" +
-        "Vui lòng liên hệ Admin để xác nhận."
+        "Vui lòng chờ Admin xác nhận."
     );
 
 }
 
+
+
+/* =========================
+   LỊCH SỬ ĐƠN HÀNG
+========================= */
 
 function renderOrders() {
 
@@ -458,6 +759,7 @@ function renderOrders() {
     }
 
 
+
     const orders =
         JSON.parse(
             localStorage.getItem(
@@ -466,7 +768,10 @@ function renderOrders() {
         );
 
 
-    if (orders.length === 0) {
+
+    if (
+        orders.length === 0
+    ) {
 
         box.innerHTML =
             '<p class="muted">Chưa có đơn hàng nào.</p>';
@@ -476,10 +781,12 @@ function renderOrders() {
     }
 
 
-    box.innerHTML =
-        orders.map(function(order) {
 
-            return `
+    box.innerHTML =
+        orders.map(
+            function(order) {
+
+                return `
 
                 <div style="
                     padding:15px;
@@ -489,47 +796,117 @@ function renderOrders() {
                     background:rgba(255,255,255,.03);
                 ">
 
+
                     <div style="
                         font-size:18px;
                         font-weight:bold;
                     ">
-                        🛍️ ${order.product}
+
+                        🛍️ ${escapeHTML(
+                            order.product || ""
+                        )}
+
                     </div>
 
+
                     <div style="margin-top:6px">
+
                         💰 Giá:
+
                         <b>
-                            ${Number(order.price)
-                            .toLocaleString("vi-VN")}đ
+
+                            ${Number(
+                                order.price || 0
+                            ).toLocaleString(
+                                "vi-VN"
+                            )}đ
+
                         </b>
+
                     </div>
 
+
                     <div style="margin-top:6px">
-                        🕐 ${order.time}
+
+                        🕐 ${escapeHTML(
+                            order.time || ""
+                        )}
+
                     </div>
+
 
                     <div style="
                         margin-top:8px;
                         color:#00ff99;
                         font-weight:bold;
                     ">
-                        ✅ ${order.status}
+
+                        ✅ ${escapeHTML(
+                            order.status || ""
+                        )}
+
                     </div>
+
 
                 </div>
 
-            `;
+                `;
 
-        }).join("");
+            }
+        ).join("");
 
 }
 
+
+
+/* =========================
+   CHỐNG HTML LỖI
+========================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =========================
+   KHỞI ĐỘNG
+========================= */
 
 render();
 
 renderOrders();
 
+
 </script>
 
 </body>
+
 </html>
