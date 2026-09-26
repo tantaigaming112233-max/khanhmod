@@ -1,129 +1,138 @@
 <!DOCTYPE html>
+
 <html lang="vi">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Admin - KhánhMod</title>
+<title>Admin - KhánhMod</title>
 
-    <link
-        rel="stylesheet"
-        href="account.css"
-    >
+<link
+    rel="stylesheet"
+    href="account.css"
+>
+```
 
 </head>
 
-
 <body>
-
 
 <nav class="nav">
 
-    <div class="nav-inner">
+```
+<div class="nav-inner">
 
-        <a
-            class="brand"
-            href="index.html"
+    <a
+        class="brand"
+        href="index.html"
+    >
+
+        <img
+            src="images/logo.png"
+            alt="KhánhMod"
         >
 
-            <img
-                src="images/logo.png"
-                alt="KhánhMod"
-            >
+        KhánhMod Admin
 
-            KhánhMod Admin
+    </a>
 
+
+    <div class="links">
+
+        <a href="index.html">
+            Trang chủ
         </a>
 
-
-        <div class="links">
-
-            <a href="index.html">
-                Trang chủ
-            </a>
-
-            <a
-                href="#"
-                onclick="adminLogout(); return false;"
-            >
-                Đăng xuất
-            </a>
-
-        </div>
+        <a
+            href="#"
+            onclick="adminLogout(); return false;"
+        >
+            Đăng xuất
+        </a>
 
     </div>
+
+</div>
+```
 
 </nav>
 
-
-
 <main class="page">
 
-    <div class="container">
+```
+<div class="container">
 
 
-        <h1 class="title">
-            🛠️ Admin Panel
-        </h1>
+    <h1 class="title">
+        🛠️ Admin Panel
+    </h1>
 
 
-        <p class="subtitle">
-            Quản lý yêu cầu nạp tiền
-        </p>
-
-
-
-        <div class="panel">
-
-            <h2>
-                💰 Yêu cầu nạp tiền
-            </h2>
-
-
-            <div id="requests">
-
-                <p class="muted">
-                    Đang tải...
-                </p>
-
-            </div>
-
-        </div>
+    <p class="subtitle">
+        Quản lý tài khoản và yêu cầu nạp tiền
+    </p>
 
 
 
-        <div
-            class="panel"
-            style="margin-top:20px"
-        >
+    <!-- =========================
+         YÊU CẦU NẠP TIỀN
+    ========================== -->
 
-            <h2>
-                👥 Tài khoản người dùng
-            </h2>
+    <div class="panel">
+
+        <h2>
+            💰 Yêu cầu nạp tiền
+        </h2>
 
 
-            <div id="users">
+        <div id="requests">
 
-                <p class="muted">
-                    Đang tải...
-                </p>
-
-            </div>
+            <p class="muted">
+                Đang tải...
+            </p>
 
         </div>
-
 
     </div>
 
+
+
+    <!-- =========================
+         DANH SÁCH TÀI KHOẢN
+    ========================== -->
+
+    <div
+        class="panel"
+        style="margin-top:20px"
+    >
+
+        <h2>
+            👥 Tài khoản người dùng
+        </h2>
+
+
+        <div id="users">
+
+            <p class="muted">
+                Đang tải...
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+```
+
 </main>
-
-
 
 <script>
 
@@ -131,7 +140,6 @@
 /* =========================
    KIỂM TRA ADMIN
 ========================= */
-
 
 function checkAdmin() {
 
@@ -180,9 +188,118 @@ function checkAdmin() {
 
 
 /* =========================
-   HIỂN THỊ YÊU CẦU
+   LẤY DANH SÁCH USER
 ========================= */
 
+function getUsers() {
+
+    let users =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_users"
+            ) || "[]"
+        );
+
+
+    /*
+       Tương thích với hệ thống cũ:
+       Nếu chỉ có khanhmod_user
+       thì tự đưa tài khoản đó
+       vào danh sách nhiều user.
+    */
+
+    if (
+        users.length === 0
+    ) {
+
+        const oldUser =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_user"
+                ) || "null"
+            );
+
+
+        if (oldUser) {
+
+            users = [
+                oldUser
+            ];
+
+            localStorage.setItem(
+                "khanhmod_users",
+                JSON.stringify(users)
+            );
+
+        }
+
+    }
+
+
+    return users;
+
+}
+
+
+
+/* =========================
+   LƯU DANH SÁCH USER
+========================= */
+
+function saveUsers(users) {
+
+    localStorage.setItem(
+        "khanhmod_users",
+        JSON.stringify(users)
+    );
+
+
+    /*
+       Cập nhật tài khoản hiện tại
+       để hệ thống cũ vẫn hoạt động.
+    */
+
+    const currentUser =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_user"
+            ) || "null"
+        );
+
+
+    if (currentUser) {
+
+        const updated =
+            users.find(
+                function(user) {
+
+                    return (
+                        user.username ===
+                        currentUser.username
+                    );
+
+                }
+            );
+
+
+        if (updated) {
+
+            localStorage.setItem(
+                "khanhmod_user",
+                JSON.stringify(updated)
+            );
+
+        }
+
+    }
+
+}
+
+
+
+/* =========================
+   HIỂN THỊ YÊU CẦU NẠP TIỀN
+========================= */
 
 function renderRequests() {
 
@@ -226,28 +343,28 @@ function renderRequests() {
                 ">
 
                     <h3>
-                        👤 ${request.username}
+                        👤 ${escapeHTML(request.username)}
                     </h3>
 
 
                     <p>
                         💰 Số tiền:
                         <b>
-                            ${Number(request.amount)
+                            ${Number(request.amount || 0)
                             .toLocaleString("vi-VN")}đ
                         </b>
                     </p>
 
 
                     <p>
-                        🕐 ${request.time}
+                        🕐 ${escapeHTML(request.time || "")}
                     </p>
 
 
                     <p>
                         📌 Trạng thái:
                         <b>
-                            ${request.status}
+                            ${escapeHTML(request.status || "")}
                         </b>
                     </p>
 
@@ -298,7 +415,6 @@ function renderRequests() {
    DUYỆT NẠP TIỀN
 ========================= */
 
-
 function approveRequest(index) {
 
     const requests =
@@ -330,19 +446,24 @@ function approveRequest(index) {
     }
 
 
-    const user =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_user"
-            ) || "null"
+    const users =
+        getUsers();
+
+
+    const userIndex =
+        users.findIndex(
+            function(user) {
+
+                return (
+                    user.username ===
+                    request.username
+                );
+
+            }
         );
 
 
-    if (
-        !user ||
-        user.username !==
-        request.username
-    ) {
+    if (userIndex === -1) {
 
         alert(
             "Không tìm thấy tài khoản người dùng."
@@ -353,19 +474,20 @@ function approveRequest(index) {
     }
 
 
-    user.balance =
-        Number(user.balance || 0) +
-        Number(request.amount);
+    users[userIndex].balance =
+        Number(
+            users[userIndex].balance || 0
+        ) +
+        Number(
+            request.amount || 0
+        );
 
 
     request.status =
         "Đã duyệt";
 
 
-    localStorage.setItem(
-        "khanhmod_user",
-        JSON.stringify(user)
-    );
+    saveUsers(users);
 
 
     localStorage.setItem(
@@ -376,9 +498,10 @@ function approveRequest(index) {
 
     alert(
         "Đã cộng " +
-        Number(request.amount)
+        Number(request.amount || 0)
         .toLocaleString("vi-VN") +
-        "đ vào tài khoản."
+        "đ vào tài khoản " +
+        request.username
     );
 
 
@@ -391,9 +514,8 @@ function approveRequest(index) {
 
 
 /* =========================
-   TỪ CHỐI
+   TỪ CHỐI NẠP TIỀN
 ========================= */
-
 
 function rejectRequest(index) {
 
@@ -429,9 +551,8 @@ function rejectRequest(index) {
 
 
 /* =========================
-   HIỂN THỊ USER
+   HIỂN THỊ NHIỀU USER
 ========================= */
-
 
 function renderUsers() {
 
@@ -441,15 +562,13 @@ function renderUsers() {
         );
 
 
-    const user =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_user"
-            ) || "null"
-        );
+    const users =
+        getUsers();
 
 
-    if (!user) {
+    if (
+        users.length === 0
+    ) {
 
         box.innerHTML =
             '<p class="muted">Chưa có người dùng.</p>';
@@ -459,34 +578,274 @@ function renderUsers() {
     }
 
 
-    box.innerHTML = `
+    box.innerHTML =
+        users.map(
+            function(user, index) {
 
-        <div style="
-            padding:15px;
-            border:1px solid rgba(0,255,255,.25);
-            border-radius:12px;
-        ">
+                return `
 
-            <h3>
-                👤 ${user.name}
-            </h3>
+                <div style="
+                    padding:18px;
+                    margin-bottom:15px;
+                    border:1px solid rgba(0,255,255,.25);
+                    border-radius:14px;
+                ">
 
-            <p>
-                Username:
-                <b>${user.username}</b>
-            </p>
+                    <h3>
+                        👤 ${escapeHTML(
+                            user.name ||
+                            user.username ||
+                            "Người dùng"
+                        )}
+                    </h3>
 
-            <p>
-                💰 Số dư:
-                <b>
-                    ${Number(user.balance || 0)
-                    .toLocaleString("vi-VN")}đ
-                </b>
-            </p>
 
-        </div>
+                    <p>
+                        Username:
+                        <b>
+                            ${escapeHTML(
+                                user.username || ""
+                            )}
+                        </b>
+                    </p>
 
-    `;
+
+                    <p>
+                        💰 Số dư:
+                        <b>
+                            ${Number(
+                                user.balance || 0
+                            ).toLocaleString("vi-VN")}đ
+                        </b>
+                    </p>
+
+
+                    <div style="
+                        display:flex;
+                        flex-wrap:wrap;
+                        gap:8px;
+                        margin-top:12px;
+                    ">
+
+                        <button
+                            class="btn btn-yellow"
+                            onclick="addMoney(${index})"
+                        >
+                            ➕ Cộng tiền
+                        </button>
+
+
+                        <button
+                            class="btn btn-dark"
+                            onclick="subtractMoney(${index})"
+                        >
+                            ➖ Trừ tiền
+                        </button>
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+
+/* =========================
+   CỘNG TIỀN
+========================= */
+
+function addMoney(index) {
+
+    const users =
+        getUsers();
+
+
+    const user =
+        users[index];
+
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+    const amount =
+        prompt(
+            "Nhập số tiền muốn cộng cho " +
+            user.username +
+            ":"
+        );
+
+
+    if (
+        amount === null
+    ) {
+
+        return;
+
+    }
+
+
+    const money =
+        Number(
+            amount.replace(/,/g, "")
+        );
+
+
+    if (
+        !Number.isFinite(money) ||
+        money <= 0
+    ) {
+
+        alert(
+            "Số tiền không hợp lệ!"
+        );
+
+        return;
+
+    }
+
+
+    user.balance =
+        Number(user.balance || 0) +
+        money;
+
+
+    saveUsers(users);
+
+
+    alert(
+        "Đã cộng " +
+        money.toLocaleString("vi-VN") +
+        "đ cho " +
+        user.username
+    );
+
+
+    renderUsers();
+
+}
+
+
+
+/* =========================
+   TRỪ TIỀN
+========================= */
+
+function subtractMoney(index) {
+
+    const users =
+        getUsers();
+
+
+    const user =
+        users[index];
+
+
+    if (!user) {
+
+        return;
+
+    }
+
+
+    const amount =
+        prompt(
+            "Nhập số tiền muốn trừ của " +
+            user.username +
+            ":"
+        );
+
+
+    if (
+        amount === null
+    ) {
+
+        return;
+
+    }
+
+
+    const money =
+        Number(
+            amount.replace(/,/g, "")
+        );
+
+
+    if (
+        !Number.isFinite(money) ||
+        money <= 0
+    ) {
+
+        alert(
+            "Số tiền không hợp lệ!"
+        );
+
+        return;
+
+    }
+
+
+    const currentBalance =
+        Number(
+            user.balance || 0
+        );
+
+
+    if (
+        money > currentBalance
+    ) {
+
+        alert(
+            "Số dư không đủ để trừ!"
+        );
+
+        return;
+
+    }
+
+
+    user.balance =
+        currentBalance -
+        money;
+
+
+    saveUsers(users);
+
+
+    alert(
+        "Đã trừ " +
+        money.toLocaleString("vi-VN") +
+        "đ của " +
+        user.username
+    );
+
+
+    renderUsers();
+
+}
+
+
+
+/* =========================
+   CHỐNG HTML LỖI
+========================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
@@ -495,7 +854,6 @@ function renderUsers() {
 /* =========================
    ĐĂNG XUẤT
 ========================= */
-
 
 function adminLogout() {
 
@@ -515,7 +873,6 @@ function adminLogout() {
    KHỞI ĐỘNG
 ========================= */
 
-
 if (checkAdmin()) {
 
     renderRequests();
@@ -526,7 +883,6 @@ if (checkAdmin()) {
 
 
 </script>
-
 
 </body>
 
