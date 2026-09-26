@@ -1,1 +1,533 @@
+<!DOCTYPE html>
+<html lang="vi">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin - KhánhMod</title>
+
+    <link
+        rel="stylesheet"
+        href="account.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<nav class="nav">
+
+    <div class="nav-inner">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <img
+                src="images/logo.png"
+                alt="KhánhMod"
+            >
+
+            KhánhMod Admin
+
+        </a>
+
+
+        <div class="links">
+
+            <a href="index.html">
+                Trang chủ
+            </a>
+
+            <a
+                href="#"
+                onclick="adminLogout(); return false;"
+            >
+                Đăng xuất
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<main class="page">
+
+    <div class="container">
+
+
+        <h1 class="title">
+            🛠️ Admin Panel
+        </h1>
+
+
+        <p class="subtitle">
+            Quản lý yêu cầu nạp tiền
+        </p>
+
+
+
+        <div class="panel">
+
+            <h2>
+                💰 Yêu cầu nạp tiền
+            </h2>
+
+
+            <div id="requests">
+
+                <p class="muted">
+                    Đang tải...
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div
+            class="panel"
+            style="margin-top:20px"
+        >
+
+            <h2>
+                👥 Tài khoản người dùng
+            </h2>
+
+
+            <div id="users">
+
+                <p class="muted">
+                    Đang tải...
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+
+<script>
+
+
+/* =========================
+   KIỂM TRA ADMIN
+========================= */
+
+
+function checkAdmin() {
+
+    const admin =
+        localStorage.getItem(
+            "khanhmod_admin"
+        );
+
+
+    if (admin !== "1") {
+
+        const password =
+            prompt(
+                "Nhập mật khẩu Admin:"
+            );
+
+
+        if (
+            password !== "KhánhMod@2026"
+        ) {
+
+            alert(
+                "Sai mật khẩu Admin!"
+            );
+
+            window.location.href =
+                "index.html";
+
+            return false;
+
+        }
+
+
+        localStorage.setItem(
+            "khanhmod_admin",
+            "1"
+        );
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =========================
+   HIỂN THỊ YÊU CẦU
+========================= */
+
+
+function renderRequests() {
+
+    const box =
+        document.getElementById(
+            "requests"
+        );
+
+
+    const requests =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_topup_requests"
+            ) || "[]"
+        );
+
+
+    if (
+        requests.length === 0
+    ) {
+
+        box.innerHTML =
+            '<p class="muted">Chưa có yêu cầu nạp tiền.</p>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        requests.map(
+            function(request, index) {
+
+                return `
+
+                <div style="
+                    padding:15px;
+                    margin-bottom:12px;
+                    border:1px solid rgba(0,255,255,.25);
+                    border-radius:12px;
+                ">
+
+                    <h3>
+                        👤 ${request.username}
+                    </h3>
+
+
+                    <p>
+                        💰 Số tiền:
+                        <b>
+                            ${Number(request.amount)
+                            .toLocaleString("vi-VN")}đ
+                        </b>
+                    </p>
+
+
+                    <p>
+                        🕐 ${request.time}
+                    </p>
+
+
+                    <p>
+                        📌 Trạng thái:
+                        <b>
+                            ${request.status}
+                        </b>
+                    </p>
+
+
+                    ${
+                        request.status ===
+                        "Chờ Admin xác nhận"
+
+                        ?
+
+                        `
+
+                        <button
+                            class="btn btn-yellow"
+                            onclick="approveRequest(${index})"
+                        >
+                            ✅ Duyệt
+                        </button>
+
+
+                        <button
+                            class="btn btn-dark"
+                            onclick="rejectRequest(${index})"
+                        >
+                            ❌ Từ chối
+                        </button>
+
+                        `
+
+                        :
+
+                        ""
+
+                    }
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+
+/* =========================
+   DUYỆT NẠP TIỀN
+========================= */
+
+
+function approveRequest(index) {
+
+    const requests =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_topup_requests"
+            ) || "[]"
+        );
+
+
+    const request =
+        requests[index];
+
+
+    if (!request) {
+
+        return;
+
+    }
+
+
+    if (
+        request.status !==
+        "Chờ Admin xác nhận"
+    ) {
+
+        return;
+
+    }
+
+
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_user"
+            ) || "null"
+        );
+
+
+    if (
+        !user ||
+        user.username !==
+        request.username
+    ) {
+
+        alert(
+            "Không tìm thấy tài khoản người dùng."
+        );
+
+        return;
+
+    }
+
+
+    user.balance =
+        Number(user.balance || 0) +
+        Number(request.amount);
+
+
+    request.status =
+        "Đã duyệt";
+
+
+    localStorage.setItem(
+        "khanhmod_user",
+        JSON.stringify(user)
+    );
+
+
+    localStorage.setItem(
+        "khanhmod_topup_requests",
+        JSON.stringify(requests)
+    );
+
+
+    alert(
+        "Đã cộng " +
+        Number(request.amount)
+        .toLocaleString("vi-VN") +
+        "đ vào tài khoản."
+    );
+
+
+    renderRequests();
+
+    renderUsers();
+
+}
+
+
+
+/* =========================
+   TỪ CHỐI
+========================= */
+
+
+function rejectRequest(index) {
+
+    const requests =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_topup_requests"
+            ) || "[]"
+        );
+
+
+    if (!requests[index]) {
+
+        return;
+
+    }
+
+
+    requests[index].status =
+        "Đã từ chối";
+
+
+    localStorage.setItem(
+        "khanhmod_topup_requests",
+        JSON.stringify(requests)
+    );
+
+
+    renderRequests();
+
+}
+
+
+
+/* =========================
+   HIỂN THỊ USER
+========================= */
+
+
+function renderUsers() {
+
+    const box =
+        document.getElementById(
+            "users"
+        );
+
+
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_user"
+            ) || "null"
+        );
+
+
+    if (!user) {
+
+        box.innerHTML =
+            '<p class="muted">Chưa có người dùng.</p>';
+
+        return;
+
+    }
+
+
+    box.innerHTML = `
+
+        <div style="
+            padding:15px;
+            border:1px solid rgba(0,255,255,.25);
+            border-radius:12px;
+        ">
+
+            <h3>
+                👤 ${user.name}
+            </h3>
+
+            <p>
+                Username:
+                <b>${user.username}</b>
+            </p>
+
+            <p>
+                💰 Số dư:
+                <b>
+                    ${Number(user.balance || 0)
+                    .toLocaleString("vi-VN")}đ
+                </b>
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =========================
+   ĐĂNG XUẤT
+========================= */
+
+
+function adminLogout() {
+
+    localStorage.removeItem(
+        "khanhmod_admin"
+    );
+
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+
+/* =========================
+   KHỞI ĐỘNG
+========================= */
+
+
+if (checkAdmin()) {
+
+    renderRequests();
+
+    renderUsers();
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
