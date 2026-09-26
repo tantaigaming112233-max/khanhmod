@@ -1,271 +1,165 @@
+```html
 <!DOCTYPE html>
-
 <html lang="vi">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<meta charset="UTF-8">
+    <title>Tạo tài khoản - KhánhMod</title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>Tạo tài khoản - KhánhMod</title>
-
-<link
-    rel="stylesheet"
-    href="account.css"
->
-```
-
+    <link rel="stylesheet" href="account.css">
 </head>
 
 <body>
 
 <nav class="nav">
+    <div class="nav-inner">
 
-```
-<div class="nav-inner">
-
-
-    <a
-        class="brand"
-        href="index.html"
-    >
-
-        <img
-            src="images/logo.png"
-            alt="KhánhMod"
-        >
-
-        KhánhMod
-
-    </a>
-
-
-    <div class="links">
-
-        <a href="index.html">
-            Trang chủ
+        <a class="brand" href="index.html">
+            <img src="images/logo.png" alt="KhánhMod">
+            KhánhMod
         </a>
 
-
-        <a href="login.html">
-            Đăng nhập
-        </a>
+        <div class="links">
+            <a href="index.html">Trang chủ</a>
+            <a href="login.html">Đăng nhập</a>
+        </div>
 
     </div>
-
-
-</div>
-```
-
 </nav>
+
 
 <main class="page">
 
-```
-<div class="container">
+    <div class="container">
 
-
-    <h1 class="title">
-        Tạo tài khoản
-    </h1>
-
-
-    <p class="subtitle">
-        Tạo tài khoản để quản lý số dư và đơn hàng
-    </p>
-
-
-
-    <div class="panel form-panel">
-
-
-        <label for="name">
-            Tên hiển thị
-        </label>
-
-
-        <input
-            id="name"
-            type="text"
-            placeholder="Ví dụ: Văn Khánh"
-        >
-
-
-
-        <label for="username">
-            Tên đăng nhập
-        </label>
-
-
-        <input
-            id="username"
-            type="text"
-            placeholder="Ví dụ: khanhmod"
-        >
-
-
-
-        <label for="password">
-            Mật khẩu
-        </label>
-
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Ít nhất 6 ký tự"
-        >
-
-
-
-        <label for="password2">
-            Nhập lại mật khẩu
-        </label>
-
-
-        <input
-            id="password2"
-            type="password"
-            placeholder="Nhập lại mật khẩu"
-        >
-
-
-
-        <div
-            id="error"
-            class="error"
-        ></div>
-
-
-        <div
-            id="success"
-            class="success"
-        ></div>
-
-
-
-        <button
-            type="button"
-            class="btn btn-primary full"
-            onclick="register()"
-        >
-
+        <h1 class="title">
             Tạo tài khoản
+        </h1>
 
-        </button>
-
-
-
-        <p class="small">
-
-            Đã có tài khoản?
-
-            <a href="login.html">
-                Đăng nhập
-            </a>
-
+        <p class="subtitle">
+            Tạo tài khoản để quản lý số dư và đơn hàng
         </p>
 
 
+        <div class="panel form-panel">
 
-        <div class="note">
+            <label for="name">
+                Tên hiển thị
+            </label>
 
-            Tài khoản hiện được lưu trên trình duyệt của thiết bị này.
+            <input
+                id="name"
+                type="text"
+                placeholder="Ví dụ: Văn Khánh"
+            >
+
+
+            <label for="username">
+                Tên đăng nhập
+            </label>
+
+            <input
+                id="username"
+                type="text"
+                placeholder="Ví dụ: khanhmod"
+            >
+
+
+            <label for="password">
+                Mật khẩu
+            </label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="Ít nhất 6 ký tự"
+            >
+
+
+            <label for="password2">
+                Nhập lại mật khẩu
+            </label>
+
+            <input
+                id="password2"
+                type="password"
+                placeholder="Nhập lại mật khẩu"
+            >
+
+
+            <div id="error" class="error"></div>
+
+            <div id="success" class="success"></div>
+
+
+            <button
+                type="button"
+                class="btn btn-primary full"
+                onclick="register()"
+            >
+                Tạo tài khoản
+            </button>
+
+
+            <p class="small">
+                Đã có tài khoản?
+                <a href="login.html">
+                    Đăng nhập
+                </a>
+            </p>
+
+
+            <div class="note">
+                Tài khoản hiện được lưu trên trình duyệt của thiết bị này.
+            </div>
 
         </div>
 
-
     </div>
-
-
-</div>
-```
 
 </main>
 
+
 <script>
-
-
-/* =========================
-   ĐĂNG KÝ TÀI KHOẢN
-========================= */
 
 function register() {
 
-
     const nameInput =
-        document.getElementById(
-            "name"
-        );
-
+        document.getElementById("name");
 
     const usernameInput =
-        document.getElementById(
-            "username"
-        );
-
+        document.getElementById("username");
 
     const passwordInput =
-        document.getElementById(
-            "password"
-        );
-
+        document.getElementById("password");
 
     const password2Input =
-        document.getElementById(
-            "password2"
-        );
-
+        document.getElementById("password2");
 
     const error =
-        document.getElementById(
-            "error"
-        );
-
+        document.getElementById("error");
 
     const success =
-        document.getElementById(
-            "success"
-        );
-
+        document.getElementById("success");
 
 
     const displayName =
         nameInput.value.trim();
 
-
     const username =
-        usernameInput.value
-        .trim()
-        .toLowerCase();
-
+        usernameInput.value.trim().toLowerCase();
 
     const password =
         passwordInput.value;
-
 
     const password2 =
         password2Input.value;
 
 
+    error.style.display = "none";
+    success.style.display = "none";
 
-    error.style.display =
-        "none";
-
-
-    success.style.display =
-        "none";
-
-
-
-    /* =========================
-       KIỂM TRA DỮ LIỆU
-    ========================== */
 
     if (
         !displayName ||
@@ -277,136 +171,93 @@ function register() {
         error.textContent =
             "Vui lòng nhập đầy đủ thông tin.";
 
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         return;
-
     }
 
 
-
-    if (
-        username.length < 3
-    ) {
+    if (username.length < 3) {
 
         error.textContent =
             "Tên đăng nhập phải có ít nhất 3 ký tự.";
 
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         return;
-
     }
 
 
-
-    if (
-        password.length < 6
-    ) {
+    if (password.length < 6) {
 
         error.textContent =
             "Mật khẩu phải có ít nhất 6 ký tự.";
 
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         return;
-
     }
 
 
-
-    if (
-        password !== password2
-    ) {
+    if (password !== password2) {
 
         error.textContent =
             "Mật khẩu nhập lại không khớp.";
 
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         return;
-
     }
 
 
+    /* ================================
+       LẤY DANH SÁCH TÀI KHOẢN
+    ================================= */
 
-    /* =========================
-       LẤY DANH SÁCH USER
-    ========================== */
-
-    let users =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_users"
-            ) || "[]"
-        );
+    let users = JSON.parse(
+        localStorage.getItem("khanhmod_users") || "[]"
+    );
 
 
+    /* ================================
+       CHUYỂN TÀI KHOẢN CŨ SANG DANH SÁCH
+    ================================= */
 
-    /*
-       Nếu hệ thống cũ có tài khoản
-       nhưng chưa có khanhmod_users
-       thì chuyển tài khoản đó vào
-       danh sách mới.
-    */
+    if (!Array.isArray(users)) {
+        users = [];
+    }
+
+
+    const oldUser = JSON.parse(
+        localStorage.getItem("khanhmod_user") || "null"
+    );
+
 
     if (
+        oldUser &&
+        oldUser.username &&
         users.length === 0
     ) {
 
-        const oldUser =
-            JSON.parse(
-                localStorage.getItem(
-                    "khanhmod_user"
-                ) || "null"
-            );
+        users.push(oldUser);
 
-
-        if (
-            oldUser &&
-            oldUser.username
-        ) {
-
-            users.push(
-                oldUser
-            );
-
-        }
-
+        localStorage.setItem(
+            "khanhmod_users",
+            JSON.stringify(users)
+        );
     }
 
 
+    /* ================================
+       KIỂM TRA TÀI KHOẢN ĐÃ TỒN TẠI
+    ================================= */
 
-    /* =========================
-       KIỂM TRA USERNAME
-    ========================== */
+    const exists = users.some(function(user) {
 
-    const exists =
-        users.some(
-            function(user) {
+        return String(user.username || "")
+            .toLowerCase() === username;
 
-                return (
-                    String(
-                        user.username || ""
-                    ).toLowerCase() ===
-                    username
-                );
-
-            }
-        );
-
+    });
 
 
     if (exists) {
@@ -414,48 +265,35 @@ function register() {
         error.textContent =
             "Tên đăng nhập này đã tồn tại.";
 
-
-        error.style.display =
-            "block";
-
+        error.style.display = "block";
 
         return;
-
     }
 
 
-
-    /* =========================
-       TẠO USER MỚI
-    ========================== */
+    /* ================================
+       TẠO TÀI KHOẢN MỚI
+    ================================= */
 
     const user = {
 
-        name:
-            displayName,
+        name: displayName,
 
-        username:
-            username,
+        username: username,
 
-        password:
-            password,
+        password: password,
 
-        balance:
-            0
+        balance: 0
 
     };
 
 
-
-    /* =========================
-       THÊM VÀO DANH SÁCH
-    ========================== */
-
-    users.push(
-        user
-    );
+    users.push(user);
 
 
+    /* ================================
+       LƯU DANH SÁCH TÀI KHOẢN
+    ================================= */
 
     localStorage.setItem(
         "khanhmod_users",
@@ -463,12 +301,10 @@ function register() {
     );
 
 
-
-    /*
-       Lưu tài khoản vừa đăng ký
-       để hệ thống đăng nhập hiện tại
-       tiếp tục tương thích.
-    */
+    /* ================================
+       LƯU TÀI KHOẢN HIỆN TẠI
+       ĐỂ TƯƠNG THÍCH VỚI ACCOUNT
+    ================================= */
 
     localStorage.setItem(
         "khanhmod_user",
@@ -476,6 +312,9 @@ function register() {
     );
 
 
+    /* ================================
+       CHƯA ĐĂNG NHẬP
+    ================================= */
 
     localStorage.setItem(
         "khanhmod_logged",
@@ -483,40 +322,31 @@ function register() {
     );
 
 
-
-    /* =========================
-       THÔNG BÁO
-    ========================== */
+    /* ================================
+       THÔNG BÁO THÀNH CÔNG
+    ================================= */
 
     success.textContent =
         "Tạo tài khoản thành công! Đang chuyển sang đăng nhập...";
 
-
-    success.style.display =
-        "block";
+    success.style.display = "block";
 
 
+    /* ================================
+       CHUYỂN SANG TRANG ĐĂNG NHẬP
+    ================================= */
 
-    /* =========================
-       CHUYỂN ĐẾN LOGIN
-    ========================== */
+    setTimeout(function() {
 
-    setTimeout(
-        function() {
+        window.location.href =
+            "login.html";
 
-            window.location.href =
-                "login.html";
-
-        },
-        1000
-    );
-
+    }, 1000);
 
 }
-
 
 </script>
 
 </body>
-
 </html>
+```
