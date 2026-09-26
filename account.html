@@ -1,22 +1,181 @@
-<!DOCTYPE html><html lang="vi"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tài khoản - KhánhMod</title><link rel="stylesheet" href="account.css"></head><body>
-<nav class="nav"><div class="nav-inner"><a class="brand" href="index.html"><img src="images/logo.png">KhánhMod</a><div class="links"><a href="index.html">Trang chủ</a><a href="#" onclick="logout()">Đăng xuất</a></div></div></nav>
-<main class="page"><div class="container"><h1 class="title">Tài khoản của tôi</h1><p class="subtitle">Quản lý thông tin và số dư</p>
-<div class="account-grid"><div class="panel profile"><div class="avatar" id="avatar">K</div><h2 id="name">KhánhMod</h2><p class="muted">@<span id="username"></span></p><div class="balance" id="balance">0đ</div><p class="muted">Số dư tài khoản</p><div class="actions" style="justify-content:center"><button class="btn btn-yellow" onclick="openTopup()">💰 Nạp tiền</button><a class="btn btn-dark" href="index.html#products">🛒 Mua sản phẩm</a></div></div>
-<div class="panel"><h2>Thông tin tài khoản</h2><div class="info-row"><span>Tên hiển thị</span><b id="infoName"></b></div><div class="info-row"><span>Tên đăng nhập</span><b id="infoUsername"></b></div><div class="info-row"><span>Số dư</span><b id="infoBalance"></b></div><div class="note">Lưu ý: số dư ở phiên bản này chỉ là số dư demo được lưu trên trình duyệt. Không nên dùng nó cho thanh toán thật.</div></div></div></div><div class="panel" style="margin-top:20px;">
-    <h2>🛒 Lịch sử đơn hàng</h2>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản - KhánhMod</title>
+    <link rel="stylesheet" href="account.css">
+</head>
 
-    <div id="orderHistory">
-        <p class="muted">Chưa có đơn hàng nào.</p>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+
+        <a class="brand" href="index.html">
+            <img src="images/logo.png" alt="KhánhMod">
+            KhánhMod
+        </a>
+
+        <div class="links">
+            <a href="index.html">Trang chủ</a>
+
+            <a href="#" onclick="logout(); return false;">
+                Đăng xuất
+            </a>
+        </div>
+
     </div>
-</div></main>
-<div id="topup" class="modal" onclick="outside(event)">
+</nav>
+
+
+<main class="page">
+
+    <div class="container">
+
+        <h1 class="title">
+            Tài khoản của tôi
+        </h1>
+
+        <p class="subtitle">
+            Quản lý thông tin và số dư
+        </p>
+
+
+        <div class="account-grid">
+
+            <!-- THÔNG TIN TÀI KHOẢN -->
+
+            <div class="panel profile">
+
+                <div class="avatar" id="avatar">
+                    K
+                </div>
+
+                <h2 id="name">
+                    KhánhMod
+                </h2>
+
+                <p class="muted">
+                    @<span id="username"></span>
+                </p>
+
+                <div class="balance" id="balance">
+                    0đ
+                </div>
+
+                <p class="muted">
+                    Số dư tài khoản
+                </p>
+
+
+                <div
+                    class="actions"
+                    style="justify-content:center"
+                >
+
+                    <button
+                        class="btn btn-yellow"
+                        onclick="openTopup()"
+                    >
+                        💰 Nạp tiền
+                    </button>
+
+                    <a
+                        class="btn btn-dark"
+                        href="index.html#products"
+                    >
+                        🛒 Mua sản phẩm
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHI TIẾT -->
+
+            <div class="panel">
+
+                <h2>
+                    Thông tin tài khoản
+                </h2>
+
+                <div class="info-row">
+                    <span>Tên hiển thị</span>
+                    <b id="infoName"></b>
+                </div>
+
+                <div class="info-row">
+                    <span>Tên đăng nhập</span>
+                    <b id="infoUsername"></b>
+                </div>
+
+                <div class="info-row">
+                    <span>Số dư</span>
+                    <b id="infoBalance"></b>
+                </div>
+
+                <div class="note">
+                    Số dư hiện là số dư demo.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LỊCH SỬ ĐƠN HÀNG -->
+
+        <div
+            class="panel"
+            style="margin-top:20px"
+        >
+
+            <h2>
+                🛒 Lịch sử đơn hàng
+            </h2>
+
+            <div id="orderHistory">
+
+                <p class="muted">
+                    Chưa có đơn hàng nào.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- POPUP NẠP TIỀN -->
+
+<div
+    id="topup"
+    class="modal"
+    onclick="outside(event)"
+>
+
     <div class="modal-box">
 
-        <span class="close" onclick="closeTopup()">×</span>
+        <span
+            class="close"
+            onclick="closeTopup()"
+        >
+            ×
+        </span>
 
-        <h2 class="title" style="font-size:25px">
+
+        <h2
+            class="title"
+            style="font-size:25px"
+        >
             💰 Nạp tiền
         </h2>
+
 
         <img
             class="qr"
@@ -24,7 +183,10 @@
             alt="QR thanh toán"
         >
 
-        <p>Quét mã QR để chuyển khoản.</p>
+
+        <p>
+            Quét mã QR để chuyển khoản.
+        </p>
 
         <p>
             <b>MB Bank</b>
@@ -35,9 +197,11 @@
             <b>57509092008</b>
         </p>
 
+
         <label for="topupAmount">
             Số tiền muốn nạp
         </label>
+
 
         <input
             id="topupAmount"
@@ -47,18 +211,21 @@
             placeholder="Ví dụ: 100000"
         >
 
+
         <div
             id="topupError"
             class="error"
             style="display:none"
         ></div>
 
+
         <button
-    class="btn btn-yellow full"
-    onclick="submitTopupRequest()"
->
-    📤 Gửi yêu cầu nạp 
+            class="btn btn-yellow full"
+            onclick="submitTopupRequest()"
+        >
+            📤 Gửi yêu cầu nạp
         </button>
+
 
         <a
             class="btn btn-primary full"
@@ -70,28 +237,120 @@
         </a>
 
     </div>
-</div>
-<script>
-function getUser(){return JSON.parse(localStorage.getItem('khanhmod_user')||'null')}
-function render(){if(localStorage.getItem('khanhmod_logged')!=='1'||!getUser()){location.href='login.html';return}const u=getUser();document.getElementById('name').textContent=u.name;document.getElementById('username').textContent=u.username;document.getElementById('avatar').textContent=(u.name||'K').charAt(0).toUpperCase();document.getElementById('balance').textContent=Number(u.balance||0).toLocaleString('vi-VN')+'đ';document.getElementById('infoName').textContent=u.name;document.getElementById('infoUsername').textContent=u.username;document.getElementById('infoBalance').textContent=Number(u.balance||0).toLocaleString('vi-VN')+'đ'}
-function logout(){localStorage.removeItem('khanhmod_logged');location.href='login.html'}
-function openTopup() {
-    document.getElementById("topup").classList.add("show");
 
-    document.getElementById("topupAmount").value = "";
-    document.getElementById("topupError").style.display = "none";
+</div>
+
+
+<script>
+
+function getUser() {
+
+    return JSON.parse(
+        localStorage.getItem("khanhmod_user") || "null"
+    );
+
+}
+
+
+function render() {
+
+    const user = getUser();
+
+    if (
+        localStorage.getItem("khanhmod_logged") !== "1" ||
+        !user
+    ) {
+
+        window.location.href = "login.html";
+
+        return;
+
+    }
+
+
+    document.getElementById("name").textContent =
+        user.name;
+
+    document.getElementById("username").textContent =
+        user.username;
+
+
+    document.getElementById("avatar").textContent =
+        (user.name || "K").charAt(0).toUpperCase();
+
+
+    const balance =
+        Number(user.balance || 0);
+
+
+    document.getElementById("balance").textContent =
+        balance.toLocaleString("vi-VN") + "đ";
+
+
+    document.getElementById("infoName").textContent =
+        user.name;
+
+
+    document.getElementById("infoUsername").textContent =
+        user.username;
+
+
+    document.getElementById("infoBalance").textContent =
+        balance.toLocaleString("vi-VN") + "đ";
+
+}
+
+
+function logout() {
+
+    localStorage.removeItem(
+        "khanhmod_logged"
+    );
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+function openTopup() {
+
+    document
+        .getElementById("topup")
+        .classList.add("show");
+
+
+    document
+        .getElementById("topupAmount")
+        .value = "";
+
+
+    document
+        .getElementById("topupError")
+        .style.display = "none";
+
 }
 
 
 function closeTopup() {
-    document.getElementById("topup").classList.remove("show");
+
+    document
+        .getElementById("topup")
+        .classList.remove("show");
+
 }
 
 
 function outside(event) {
-    if (event.target.id === "topup") {
+
+    if (
+        event.target.id === "topup"
+    ) {
+
         closeTopup();
+
     }
+
 }
 
 
@@ -100,15 +359,22 @@ function submitTopupRequest() {
     const amountInput =
         document.getElementById("topupAmount");
 
+
     const error =
         document.getElementById("topupError");
+
 
     const amount =
         Number(amountInput.value);
 
+
     error.style.display = "none";
 
-    if (!amount || amount < 1000) {
+
+    if (
+        !amount ||
+        amount < 1000
+    ) {
 
         error.textContent =
             "Vui lòng nhập số tiền từ 1.000đ trở lên.";
@@ -116,85 +382,154 @@ function submitTopupRequest() {
         error.style.display = "block";
 
         return;
+
     }
+
 
     const user = getUser();
 
+
     if (!user) {
-        window.location.href = "login.html";
+
+        window.location.href =
+            "login.html";
+
         return;
+
     }
 
-    const requests = JSON.parse(
-        localStorage.getItem("khanhmod_topup_requests") || "[]"
-    );
+
+    const requests =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_topup_requests"
+            ) || "[]"
+        );
+
 
     requests.push({
-        username: user.username,
-        amount: amount,
-        status: "Chờ Admin xác nhận",
-        time: new Date().toLocaleString("vi-VN")
+
+        username:
+            user.username,
+
+        amount:
+            amount,
+
+        status:
+            "Chờ Admin xác nhận",
+
+        time:
+            new Date().toLocaleString("vi-VN")
+
     });
+
 
     localStorage.setItem(
         "khanhmod_topup_requests",
         JSON.stringify(requests)
     );
 
+
     closeTopup();
+
 
     alert(
         "Đã gửi yêu cầu nạp " +
         amount.toLocaleString("vi-VN") +
-        "đ. Vui lòng liên hệ Admin để xác nhận."
-    );
-} {
-    const box = document.getElementById("orderHistory");
-
-    if (!box) return;
-
-    const orders = JSON.parse(
-        localStorage.getItem("khanhmod_orders") || "[]"
+        "đ.\n\n" +
+        "Vui lòng liên hệ Admin để xác nhận."
     );
 
-    if (orders.length === 0) {
-        box.innerHTML = "<p>Chưa có đơn hàng nào.</p>";
-        return;
-    }
-
-    box.innerHTML = orders.map(function(order, index) {
-        return `
-            <div style="
-                padding:15px;
-                margin-bottom:12px;
-                border:1px solid rgba(0,255,255,.25);
-                border-radius:12px;
-                background:rgba(255,255,255,.03);
-            ">
-                <div style="font-size:18px;font-weight:bold;">
-                    🛍️ ${order.product}
-                </div>
-
-                <div style="margin-top:6px;">
-                    💰 Giá: 
-                    <b>${Number(order.price).toLocaleString("vi-VN")}đ</b>
-                </div>
-
-                <div style="margin-top:6px;">
-                    🕐 ${order.time}
-                </div>
-
-                <div style="
-                    margin-top:8px;
-                    color:#00ff99;
-                    font-weight:bold;
-                ">
-                    ✅ ${order.status}
-                </div>
-            </div>
-        `;
-    }).join("");
 }
 
+
+function renderOrders() {
+
+    const box =
+        document.getElementById(
+            "orderHistory"
+        );
+
+
+    if (!box) {
+
+        return;
+
+    }
+
+
+    const orders =
+        JSON.parse(
+            localStorage.getItem(
+                "khanhmod_orders"
+            ) || "[]"
+        );
+
+
+    if (orders.length === 0) {
+
+        box.innerHTML =
+            '<p class="muted">Chưa có đơn hàng nào.</p>';
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        orders.map(function(order) {
+
+            return `
+
+                <div style="
+                    padding:15px;
+                    margin-bottom:12px;
+                    border:1px solid rgba(0,255,255,.25);
+                    border-radius:12px;
+                    background:rgba(255,255,255,.03);
+                ">
+
+                    <div style="
+                        font-size:18px;
+                        font-weight:bold;
+                    ">
+                        🛍️ ${order.product}
+                    </div>
+
+                    <div style="margin-top:6px">
+                        💰 Giá:
+                        <b>
+                            ${Number(order.price)
+                            .toLocaleString("vi-VN")}đ
+                        </b>
+                    </div>
+
+                    <div style="margin-top:6px">
+                        🕐 ${order.time}
+                    </div>
+
+                    <div style="
+                        margin-top:8px;
+                        color:#00ff99;
+                        font-weight:bold;
+                    ">
+                        ✅ ${order.status}
+                    </div>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+render();
+
 renderOrders();
-</script></body></html>
+
+</script>
+
+</body>
+</html>
