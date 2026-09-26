@@ -50,6 +50,7 @@
             Trang chủ
         </a>
 
+
         <a
             href="#"
             onclick="adminLogout(); return false;"
@@ -76,7 +77,7 @@
 
 
     <p class="subtitle">
-        Quản lý tài khoản và yêu cầu nạp tiền
+        Quản lý tài khoản, nạp tiền và đơn hàng
     </p>
 
 
@@ -93,6 +94,32 @@
 
 
         <div id="requests">
+
+            <p class="muted">
+                Đang tải...
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         ĐƠN HÀNG
+    ========================== -->
+
+    <div
+        class="panel"
+        style="margin-top:20px"
+    >
+
+        <h2>
+            🛒 Đơn hàng
+        </h2>
+
+
+        <div id="orders">
 
             <p class="muted">
                 Đang tải...
@@ -193,47 +220,89 @@ function checkAdmin() {
 
 function getUsers() {
 
-    let users =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_users"
-            ) || "[]"
-        );
+    let users = [];
+
+
+    try {
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_users"
+                ) || "[]"
+            );
+
+
+        if (Array.isArray(data)) {
+
+            users = data;
+
+        }
+
+    } catch (e) {
+
+        users = [];
+
+    }
+
 
 
     /*
-       Tương thích với hệ thống cũ:
-       Nếu chỉ có khanhmod_user
-       thì tự đưa tài khoản đó
-       vào danh sách nhiều user.
+       Tương thích tài khoản cũ.
     */
 
-    if (
-        users.length === 0
-    ) {
+    let oldUser = null;
 
-        const oldUser =
+
+    try {
+
+        oldUser =
             JSON.parse(
                 localStorage.getItem(
                     "khanhmod_user"
                 ) || "null"
             );
 
+    } catch (e) {
 
-        if (oldUser) {
+        oldUser = null;
 
-            users = [
-                oldUser
-            ];
+    }
 
-            localStorage.setItem(
-                "khanhmod_users",
-                JSON.stringify(users)
-            );
+
+
+    if (
+        oldUser &&
+        oldUser.username
+    ) {
+
+        const exists =
+            users.some(function(user) {
+
+                return String(
+                    user.username || ""
+                ).toLowerCase() ===
+                String(
+                    oldUser.username || ""
+                ).toLowerCase();
+
+            });
+
+
+        if (!exists) {
+
+            users.push(oldUser);
 
         }
 
     }
+
+
+
+    localStorage.setItem(
+        "khanhmod_users",
+        JSON.stringify(users)
+    );
 
 
     return users;
@@ -254,32 +323,39 @@ function saveUsers(users) {
     );
 
 
-    /*
-       Cập nhật tài khoản hiện tại
-       để hệ thống cũ vẫn hoạt động.
-    */
+    let currentUser = null;
 
-    const currentUser =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_user"
-            ) || "null"
-        );
+
+    try {
+
+        currentUser =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_user"
+                ) || "null"
+            );
+
+    } catch (e) {
+
+        currentUser = null;
+
+    }
+
 
 
     if (currentUser) {
 
         const updated =
-            users.find(
-                function(user) {
+            users.find(function(user) {
 
-                    return (
-                        user.username ===
-                        currentUser.username
-                    );
+                return String(
+                    user.username || ""
+                ).toLowerCase() ===
+                String(
+                    currentUser.username || ""
+                ).toLowerCase();
 
-                }
-            );
+            });
 
 
         if (updated) {
@@ -309,12 +385,31 @@ function renderRequests() {
         );
 
 
-    const requests =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_topup_requests"
-            ) || "[]"
-        );
+    let requests = [];
+
+
+    try {
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_topup_requests"
+                ) || "[]"
+            );
+
+
+        if (Array.isArray(data)) {
+
+            requests = data;
+
+        }
+
+    } catch (e) {
+
+        requests = [];
+
+    }
+
 
 
     if (
@@ -327,6 +422,7 @@ function renderRequests() {
         return;
 
     }
+
 
 
     box.innerHTML =
@@ -342,30 +438,54 @@ function renderRequests() {
                     border-radius:12px;
                 ">
 
+
                     <h3>
-                        👤 ${escapeHTML(request.username)}
+
+                        👤 ${escapeHTML(
+                            request.username || ""
+                        )}
+
                     </h3>
 
 
                     <p>
+
                         💰 Số tiền:
+
                         <b>
-                            ${Number(request.amount || 0)
-                            .toLocaleString("vi-VN")}đ
+
+                            ${Number(
+                                request.amount || 0
+                            ).toLocaleString(
+                                "vi-VN"
+                            )}đ
+
                         </b>
+
                     </p>
 
 
                     <p>
-                        🕐 ${escapeHTML(request.time || "")}
+
+                        🕐 ${escapeHTML(
+                            request.time || ""
+                        )}
+
                     </p>
 
 
                     <p>
+
                         📌 Trạng thái:
+
                         <b>
-                            ${escapeHTML(request.status || "")}
+
+                            ${escapeHTML(
+                                request.status || ""
+                            )}
+
                         </b>
+
                     </p>
 
 
@@ -417,12 +537,31 @@ function renderRequests() {
 
 function approveRequest(index) {
 
-    const requests =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_topup_requests"
-            ) || "[]"
-        );
+    let requests = [];
+
+
+    try {
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_topup_requests"
+                ) || "[]"
+            );
+
+
+        if (Array.isArray(data)) {
+
+            requests = data;
+
+        }
+
+    } catch (e) {
+
+        requests = [];
+
+    }
+
 
 
     const request =
@@ -436,6 +575,7 @@ function approveRequest(index) {
     }
 
 
+
     if (
         request.status !==
         "Chờ Admin xác nhận"
@@ -446,6 +586,7 @@ function approveRequest(index) {
     }
 
 
+
     const users =
         getUsers();
 
@@ -454,16 +595,21 @@ function approveRequest(index) {
         users.findIndex(
             function(user) {
 
-                return (
-                    user.username ===
-                    request.username
-                );
+                return String(
+                    user.username || ""
+                ).toLowerCase() ===
+                String(
+                    request.username || ""
+                ).toLowerCase();
 
             }
         );
 
 
-    if (userIndex === -1) {
+
+    if (
+        userIndex === -1
+    ) {
 
         alert(
             "Không tìm thấy tài khoản người dùng."
@@ -472,6 +618,7 @@ function approveRequest(index) {
         return;
 
     }
+
 
 
     users[userIndex].balance =
@@ -496,13 +643,16 @@ function approveRequest(index) {
     );
 
 
+
     alert(
         "Đã cộng " +
-        Number(request.amount || 0)
-        .toLocaleString("vi-VN") +
+        Number(
+            request.amount || 0
+        ).toLocaleString("vi-VN") +
         "đ vào tài khoản " +
         request.username
     );
+
 
 
     renderRequests();
@@ -519,19 +669,41 @@ function approveRequest(index) {
 
 function rejectRequest(index) {
 
-    const requests =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_topup_requests"
-            ) || "[]"
-        );
+    let requests = [];
 
 
-    if (!requests[index]) {
+    try {
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_topup_requests"
+                ) || "[]"
+            );
+
+
+        if (Array.isArray(data)) {
+
+            requests = data;
+
+        }
+
+    } catch (e) {
+
+        requests = [];
+
+    }
+
+
+
+    if (
+        !requests[index]
+    ) {
 
         return;
 
     }
+
 
 
     requests[index].status =
@@ -551,7 +723,204 @@ function rejectRequest(index) {
 
 
 /* =========================
-   HIỂN THỊ NHIỀU USER
+   HIỂN THỊ ĐƠN HÀNG
+========================= */
+
+function renderOrders() {
+
+    const box =
+        document.getElementById(
+            "orders"
+        );
+
+
+    if (!box) {
+
+        return;
+
+    }
+
+
+
+    let orders = [];
+
+
+    try {
+
+        const data =
+            JSON.parse(
+                localStorage.getItem(
+                    "khanhmod_orders"
+                ) || "[]"
+            );
+
+
+        if (Array.isArray(data)) {
+
+            orders = data;
+
+        }
+
+    } catch (e) {
+
+        orders = [];
+
+    }
+
+
+
+    if (
+        orders.length === 0
+    ) {
+
+        box.innerHTML =
+            '<p class="muted">Chưa có đơn hàng nào.</p>';
+
+        return;
+
+    }
+
+
+
+    /*
+       Hiển thị đơn hàng mới nhất trước.
+    */
+
+    orders =
+        orders.slice().reverse();
+
+
+
+    box.innerHTML =
+        orders.map(
+            function(order, reverseIndex) {
+
+                return `
+
+                <div style="
+                    padding:18px;
+                    margin-bottom:15px;
+                    border:1px solid rgba(0,255,255,.25);
+                    border-radius:14px;
+                    background:rgba(255,255,255,.03);
+                ">
+
+
+                    <h3>
+
+                        🛍️ ${escapeHTML(
+                            order.product ||
+                            "Sản phẩm"
+                        )}
+
+                    </h3>
+
+
+                    <p>
+
+                        👤 Người mua:
+
+                        <b>
+
+                            ${escapeHTML(
+                                order.username ||
+                                "Không xác định"
+                            )}
+
+                        </b>
+
+                    </p>
+
+
+                    ${
+                        order.name
+
+                        ?
+
+                        `
+
+                        <p>
+
+                            👨 Tên hiển thị:
+
+                            <b>
+
+                                ${escapeHTML(
+                                    order.name
+                                )}
+
+                            </b>
+
+                        </p>
+
+                        `
+
+                        :
+
+                        ""
+
+                    }
+
+
+                    <p>
+
+                        💰 Giá:
+
+                        <b>
+
+                            ${Number(
+                                order.price || 0
+                            ).toLocaleString(
+                                "vi-VN"
+                            )}đ
+
+                        </b>
+
+                    </p>
+
+
+                    <p>
+
+                        🕐 Thời gian:
+
+                        ${escapeHTML(
+                            order.time || ""
+                        )}
+
+                    </p>
+
+
+                    <p>
+
+                        📌 Trạng thái:
+
+                        <b style="
+                            color:#00ff99;
+                        ">
+
+                            ${escapeHTML(
+                                order.status ||
+                                "Đã thanh toán"
+                            )}
+
+                        </b>
+
+                    </p>
+
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+
+/* =========================
+   HIỂN THỊ USER
 ========================= */
 
 function renderUsers() {
@@ -566,6 +935,7 @@ function renderUsers() {
         getUsers();
 
 
+
     if (
         users.length === 0
     ) {
@@ -576,6 +946,7 @@ function renderUsers() {
         return;
 
     }
+
 
 
     box.innerHTML =
@@ -591,32 +962,47 @@ function renderUsers() {
                     border-radius:14px;
                 ">
 
+
                     <h3>
+
                         👤 ${escapeHTML(
                             user.name ||
                             user.username ||
                             "Người dùng"
                         )}
+
                     </h3>
 
 
                     <p>
+
                         Username:
+
                         <b>
+
                             ${escapeHTML(
                                 user.username || ""
                             )}
+
                         </b>
+
                     </p>
 
 
                     <p>
+
                         💰 Số dư:
+
                         <b>
+
                             ${Number(
                                 user.balance || 0
-                            ).toLocaleString("vi-VN")}đ
+                            ).toLocaleString(
+                                "vi-VN"
+                            )}đ
+
                         </b>
+
                     </p>
 
 
@@ -627,11 +1013,14 @@ function renderUsers() {
                         margin-top:12px;
                     ">
 
+
                         <button
                             class="btn btn-yellow"
                             onclick="addMoney(${index})"
                         >
+
                             ➕ Cộng tiền
+
                         </button>
 
 
@@ -639,10 +1028,14 @@ function renderUsers() {
                             class="btn btn-dark"
                             onclick="subtractMoney(${index})"
                         >
+
                             ➖ Trừ tiền
+
                         </button>
 
+
                     </div>
+
 
                 </div>
 
@@ -676,6 +1069,7 @@ function addMoney(index) {
     }
 
 
+
     const amount =
         prompt(
             "Nhập số tiền muốn cộng cho " +
@@ -693,10 +1087,12 @@ function addMoney(index) {
     }
 
 
+
     const money =
         Number(
             amount.replace(/,/g, "")
         );
+
 
 
     if (
@@ -713,8 +1109,11 @@ function addMoney(index) {
     }
 
 
+
     user.balance =
-        Number(user.balance || 0) +
+        Number(
+            user.balance || 0
+        ) +
         money;
 
 
@@ -723,7 +1122,9 @@ function addMoney(index) {
 
     alert(
         "Đã cộng " +
-        money.toLocaleString("vi-VN") +
+        money.toLocaleString(
+            "vi-VN"
+        ) +
         "đ cho " +
         user.username
     );
@@ -756,6 +1157,7 @@ function subtractMoney(index) {
     }
 
 
+
     const amount =
         prompt(
             "Nhập số tiền muốn trừ của " +
@@ -773,10 +1175,12 @@ function subtractMoney(index) {
     }
 
 
+
     const money =
         Number(
             amount.replace(/,/g, "")
         );
+
 
 
     if (
@@ -793,10 +1197,12 @@ function subtractMoney(index) {
     }
 
 
+
     const currentBalance =
         Number(
             user.balance || 0
         );
+
 
 
     if (
@@ -812,6 +1218,7 @@ function subtractMoney(index) {
     }
 
 
+
     user.balance =
         currentBalance -
         money;
@@ -822,7 +1229,9 @@ function subtractMoney(index) {
 
     alert(
         "Đã trừ " +
-        money.toLocaleString("vi-VN") +
+        money.toLocaleString(
+            "vi-VN"
+        ) +
         "đ của " +
         user.username
     );
@@ -841,18 +1250,38 @@ function subtractMoney(index) {
 function escapeHTML(value) {
 
     return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 
 
 /* =========================
-   ĐĂNG XUẤT
+   ĐĂNG XUẤT ADMIN
 ========================= */
 
 function adminLogout() {
@@ -876,6 +1305,8 @@ function adminLogout() {
 if (checkAdmin()) {
 
     renderRequests();
+
+    renderOrders();
 
     renderUsers();
 
