@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -291,6 +293,7 @@
         }
 
         @media (max-width: 576px) {
+
             .hero {
                 min-height: 500px;
                 padding: 60px 15px;
@@ -316,238 +319,648 @@
     </style>
 </head>
 
+
 <body>
 
 <!-- THANH ĐIỀU HƯỚNG -->
+
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+
     <div class="container">
+
         <a class="navbar-brand d-flex align-items-center" href="index.html">
-            <img src="images/logo.png" alt="KhánhMod Logo" width="45" height="45" class="rounded-circle me-2">
+
+            <img
+                src="images/logo.png"
+                alt="KhánhMod Logo"
+                width="45"
+                height="45"
+                class="rounded-circle me-2"
+            >
+
             <span>KhánhMod</span>
+
         </a>
 
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#menu"
-                aria-controls="menu"
-                aria-expanded="false"
-                aria-label="Mở menu">
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Mở menu"
+        >
+
             <span class="navbar-toggler-icon"></span>
+
         </button>
 
+
         <div class="collapse navbar-collapse" id="menu">
+
             <ul class="navbar-nav ms-auto">
+
                 <li class="nav-item">
-                    <a class="nav-link active" href="#home">Trang chủ</a>
+                    <a class="nav-link active" href="#home">
+                        Trang chủ
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#products">Sản phẩm</a>
+                    <a class="nav-link" href="#products">
+                        Sản phẩm
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Liên hệ</a>
+                    <a class="nav-link" href="#contact">
+                        Liên hệ
+                    </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Đăng nhập</a>
+                    <a class="nav-link" href="login.html">
+                        Đăng nhập
+                    </a>
                 </li>
+
             </ul>
+
         </div>
+
     </div>
+
 </nav>
 
+
 <!-- THÔNG BÁO -->
+
 <div class="notice">
+
     <marquee>
-        🔥 Chào mừng đến với KhánhMod Premium | Vua Dùng Đồ  | CSKH 24/7 | Zalo: 0398247095
+        🔥 Chào mừng đến với KhánhMod Premium | Vua Dùng Đồ | CSKH 24/7 | Zalo: 0398247095
     </marquee>
+
 </div>
 
+
 <!-- HERO -->
+
 <section class="hero" id="home">
+
     <div class="hero-content">
+
         <h1>KHÁNHMOD</h1>
-        <p>Shop hỗ trợ Free Fire uy tín</p>
+
+        <p>
+            Shop hỗ trợ Free Fire uy tín
+        </p>
+
 
         <div>
-            <a href="https://zalo.me/0398247095"
-               target="_blank"
-               rel="noopener"
-               class="btn-main">
+
+            <a
+                href="https://zalo.me/0398247095"
+                target="_blank"
+                rel="noopener"
+                class="btn-main"
+            >
                 💬 Mua ngay
             </a>
 
-            <button type="button"
-                    class="btn-main btn-topup"
-                    onclick="openNapTien()">
+
+            <button
+                type="button"
+                class="btn-main btn-topup"
+                onclick="openNapTien()"
+            >
                 💰 Nạp tiền
             </button>
+
         </div>
+
     </div>
+
 </section>
 
+
 <!-- SẢN PHẨM -->
+
 <section class="container py-5" id="products">
-    <h2 class="text-center section-title mb-5">Sản phẩm nổi bật</h2>
+
+    <h2 class="text-center section-title mb-5">
+        Sản phẩm nổi bật
+    </h2>
+
 
     <div class="row g-4">
 
-        <div class="col-lg-4 col-md-6">
-            <div class="card product-card">
-                <img src="images/banner.png" alt="Proxy ShinMod">
-                <div class="card-body text-center">
-                    <h4>Proxy KhánhMod</h4>
-                    <p>Aim Antenna</p>
-                    <h3 class="price">99.000đ</h3>
-                    <button class="btn-buy" onclick="openPopup('Proxy ShinMod')">
-                        🛒 Mua ngay
-                    </button>
-                </div>
-            </div>
-        </div>
+
+        <!-- SẢN PHẨM 1 -->
 
         <div class="col-lg-4 col-md-6">
+
             <div class="card product-card">
-                <img src="images/banner.png" alt="MTH Proxy">
+
+                <img
+                    src="images/banner.png"
+                    alt="Proxy KhánhMod"
+                >
+
                 <div class="card-body text-center">
-                    <h4>ModFile FF</h4>
-                    <p>App Support hỗ trợ kéo tâm.</p>
-                    <h3 class="price">99.000đ</h3>
-                    <button class="btn-buy" onclick="openPopup('MTH Proxy')">
+
+                    <h4>
+                        Proxy KhánhMod
+                    </h4>
+
+                    <p>
+                        Aim Antenna
+                    </p>
+
+                    <h3 class="price">
+                        99.000đ
+                    </h3>
+
+                    <button
+                        class="btn-buy"
+                        onclick="openPopup('Proxy KhánhMod', 99000)"
+                    >
                         🛒 Mua ngay
                     </button>
+
                 </div>
+
             </div>
+
         </div>
 
+
+        <!-- SẢN PHẨM 2 -->
+
         <div class="col-lg-4 col-md-6">
+
             <div class="card product-card">
-                <img src="images/banner.png" alt="Fake Lag">
+
+                <img
+                    src="images/banner.png"
+                    alt="ModFile FF"
+                >
+
                 <div class="card-body text-center">
-                    <h4>Chim FF</h4>
-                    <p>bay full map.</p>
-                    <h3 class="price">3.000.000đ</h3>
-                    <button class="btn-buy" onclick="openPopup('Gravity Pro')">
+
+                    <h4>
+                        ModFile FF
+                    </h4>
+
+                    <p>
+                        App Support hỗ trợ kéo tâm.
+                    </p>
+
+                    <h3 class="price">
+                        99.000đ
+                    </h3>
+
+                    <button
+                        class="btn-buy"
+                        onclick="openPopup('ModFile FF', 99000)"
+                    >
                         🛒 Mua ngay
                     </button>
+
                 </div>
+
             </div>
+
         </div>
+
+
+        <!-- SẢN PHẨM 3 -->
+
+        <div class="col-lg-4 col-md-6">
+
+            <div class="card product-card">
+
+                <img
+                    src="images/banner.png"
+                    alt="Chim FF"
+                >
+
+                <div class="card-body text-center">
+
+                    <h4>
+                        Chim FF
+                    </h4>
+
+                    <p>
+                        Bay full map.
+                    </p>
+
+                    <h3 class="price">
+                        3.000.000đ
+                    </h3>
+
+                    <button
+                        class="btn-buy"
+                        onclick="openPopup('Chim FF', 3000000)"
+                    >
+                        🛒 Mua ngay
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
     </div>
+
 </section>
 
+
 <!-- LIÊN HỆ -->
+
 <footer id="contact" class="text-center py-5">
+
     <div class="container">
-        <h3 class="section-title">KhánhMod</h3>
-        <p>Website giới thiệu phần mềm hỗ trợ kéo tâm.</p>
-        <p>Zalo: 0398247095</p>
-        <p>Email: KhanhMod@email.com</p>
+
+        <h3 class="section-title">
+            KhánhMod
+        </h3>
+
+        <p>
+            Website giới thiệu phần mềm hỗ trợ kéo tâm.
+        </p>
+
+        <p>
+            Zalo: 0398247095
+        </p>
+
+        <p>
+            Email: KhanhMod@email.com
+        </p>
+
         <hr>
-        <p class="mb-0">© 2026 KhánhMod</p>
+
+        <p class="mb-0">
+            © 2026 KhánhMod
+        </p>
+
     </div>
+
 </footer>
 
+
 <!-- POPUP NẠP TIỀN -->
-<div id="napTienPopup" class="popup" onclick="closeOnOutside(event, 'napTienPopup')">
+
+<div
+    id="napTienPopup"
+    class="popup"
+    onclick="closeOnOutside(event, 'napTienPopup')"
+>
+
     <div class="popup-box">
-        <span class="close" onclick="closeNapTien()">&times;</span>
 
-        <h2>💰 Nạp tiền</h2>
+        <span
+            class="close"
+            onclick="closeNapTien()"
+        >
+            &times;
+        </span>
 
-        <img src="images/qr.png" alt="QR thanh toán">
 
-        <p>Quét mã QR để chuyển khoản.</p>
-        <p><b>Ngân hàng:</b> MB Bank</p>
-        <p><b>Số tài khoản:</b> 57509092008</p>
+        <h2>
+            💰 Nạp tiền
+        </h2>
 
-        <button class="btn-buy mt-3" onclick="closeNapTien()">
+
+        <img
+            src="images/qr.png"
+            alt="QR thanh toán"
+        >
+
+
+        <p>
+            Quét mã QR để chuyển khoản.
+        </p>
+
+        <p>
+            <b>Ngân hàng:</b> MB Bank
+        </p>
+
+        <p>
+            <b>Số tài khoản:</b> 57509092008
+        </p>
+
+
+        <button
+            class="btn-buy mt-3"
+            onclick="closeNapTien()"
+        >
             Đã thanh toán
         </button>
+
     </div>
+
 </div>
+
 
 <!-- POPUP THANH TOÁN -->
-<div id="paymentPopup" class="popup" onclick="closeOnOutside(event, 'paymentPopup')">
+
+<div
+    id="paymentPopup"
+    class="popup"
+    onclick="closeOnOutside(event, 'paymentPopup')"
+>
+
     <div class="popup-box">
-        <span class="close" onclick="closePopup()">&times;</span>
 
-        <h2>💳 Thanh toán</h2>
+        <span
+            class="close"
+            onclick="closePopup()"
+        >
+            &times;
+        </span>
 
-        <p id="selectedProduct">Sản phẩm</p>
 
-        <img src="images/qr.png" alt="QR thanh toán">
+        <h2>
+            💳 Thanh toán
+        </h2>
 
-        <p><b>Ngân hàng:</b> MB Bank</p>
-        <p><b>Chủ TK:</b> Phạm Văn Khánh</p>
-        <p><b>STK:</b> 57509092008</p>
 
-        <p class="mt-3">Sau khi thanh toán, vui lòng liên hệ Admin qua Zalo.</p>
+        <p id="selectedProduct">
+            Sản phẩm
+        </p>
 
-        <a href="https://zalo.me/0398247095"
-           target="_blank"
-           rel="noopener"
-           class="btn-main mt-2">
+
+        <p id="currentBalance">
+            Số dư
+        </p>
+
+
+        <img
+            src="images/qr.png"
+            alt="QR thanh toán"
+        >
+
+
+        <p>
+            <b>Ngân hàng:</b> MB Bank
+        </p>
+
+        <p>
+            <b>Chủ TK:</b> Phạm Văn Khánh
+        </p>
+
+        <p>
+            <b>STK:</b> 57509092008
+        </p>
+
+
+        <button
+            id="buyWithBalance"
+            type="button"
+            class="btn-buy mt-3"
+            onclick="confirmBuy()"
+        >
+            💰 Mua bằng số dư
+        </button>
+
+
+        <p class="mt-3">
+            Nếu số dư không đủ, vui lòng nạp tiền trước.
+        </p>
+
+
+        <a
+            href="https://zalo.me/0398247095"
+            target="_blank"
+            rel="noopener"
+            class="btn-main mt-2"
+        >
             💬 Liên hệ Zalo
         </a>
+
     </div>
+
 </div>
 
+
 <!-- NÚT ZALO -->
-<a href="https://zalo.me/0398247095"
-   class="zalo-float"
-   target="_blank"
-   rel="noopener"
-   aria-label="Liên hệ Zalo">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="Zalo">
+
+<a
+    href="https://zalo.me/0398247095"
+    class="zalo-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Liên hệ Zalo"
+>
+
+    <img
+        src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg"
+        alt="Zalo"
+    >
+
 </a>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
+
 <script>
+
+/* =========================================
+   BIẾN SẢN PHẨM
+========================================= */
 
 let selectedProduct = "";
 let selectedPrice = 0;
 
+
+/* =========================================
+   LẤY TÀI KHOẢN ĐANG ĐĂNG NHẬP
+   VÀ ĐỒNG BỘ VỚI DANH SÁCH USER
+========================================= */
+
 function getUser() {
-    return JSON.parse(
-        localStorage.getItem("khanhmod_user") || "null"
+
+    const logged =
+        localStorage.getItem("khanhmod_logged");
+
+    if (logged !== "1") {
+        return null;
+    }
+
+
+    const currentUser =
+        JSON.parse(
+            localStorage.getItem("khanhmod_user") || "null"
+        );
+
+
+    if (!currentUser || !currentUser.username) {
+        return null;
+    }
+
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("khanhmod_users") || "[]"
+        );
+
+
+    if (!Array.isArray(users)) {
+        users = [];
+    }
+
+
+    const index = users.findIndex(function(user) {
+
+        return String(user.username || "").toLowerCase()
+            ===
+            String(currentUser.username || "").toLowerCase();
+
+    });
+
+
+    if (index === -1) {
+        return currentUser;
+    }
+
+
+    /*
+       Lấy dữ liệu mới nhất từ danh sách users.
+       Điều này giúp số dư sau khi Admin cộng/trừ
+       được cập nhật chính xác.
+    */
+
+    const user = users[index];
+
+
+    localStorage.setItem(
+        "khanhmod_user",
+        JSON.stringify(user)
+    );
+
+
+    return user;
+}
+
+
+/* =========================================
+   LƯU USER VÀO CẢ 2 NƠI
+========================================= */
+
+function saveUser(user) {
+
+    localStorage.setItem(
+        "khanhmod_user",
+        JSON.stringify(user)
+    );
+
+
+    let users =
+        JSON.parse(
+            localStorage.getItem("khanhmod_users") || "[]"
+        );
+
+
+    if (!Array.isArray(users)) {
+        users = [];
+    }
+
+
+    const index = users.findIndex(function(item) {
+
+        return String(item.username || "").toLowerCase()
+            ===
+            String(user.username || "").toLowerCase();
+
+    });
+
+
+    if (index !== -1) {
+
+        users[index] = user;
+
+    } else {
+
+        users.push(user);
+
+    }
+
+
+    localStorage.setItem(
+        "khanhmod_users",
+        JSON.stringify(users)
     );
 }
 
+
+/* =========================================
+   NẠP TIỀN
+========================================= */
+
 function openNapTien() {
+
+    const logged =
+        localStorage.getItem("khanhmod_logged");
+
+
+    if (logged !== "1") {
+
+        alert(
+            "Vui lòng đăng nhập trước khi nạp tiền."
+        );
+
+        window.location.href =
+            "login.html";
+
+        return;
+    }
+
+
     document
         .getElementById("napTienPopup")
         .classList.add("show");
 }
 
+
 function closeNapTien() {
+
     document
         .getElementById("napTienPopup")
         .classList.remove("show");
 }
 
-function openPopup(productName) {
+
+/* =========================================
+   MỞ POPUP MUA HÀNG
+========================================= */
+
+function openPopup(productName, price) {
 
     const user = getUser();
 
-    if (
-        localStorage.getItem("khanhmod_logged") !== "1" ||
-        !user
-    ) {
-        alert("Vui lòng đăng nhập trước khi mua sản phẩm.");
-        window.location.href = "login.html";
+
+    if (!user) {
+
+        alert(
+            "Vui lòng đăng nhập trước khi mua sản phẩm."
+        );
+
+        window.location.href =
+            "login.html";
+
         return;
     }
 
-    selectedProduct = productName;
 
-    if (productName === "Proxy ShinMod") {
-        selectedPrice = 99000;
-    } else if (productName === "MTH Proxy") {
-        selectedPrice = 99000;
-    } else if (productName === "Fake Lag") {
-        selectedPrice = 3000000;
-    }
+    selectedProduct = productName;
+    selectedPrice = Number(price);
+
 
     document.getElementById("selectedProduct").textContent =
         "Sản phẩm: " +
@@ -556,45 +969,62 @@ function openPopup(productName) {
         selectedPrice.toLocaleString("vi-VN") +
         "đ";
 
-    document.getElementById("paymentPopup").classList.add("show");
 
-    const oldButton =
-        document.getElementById("buyWithBalance");
+    document.getElementById("currentBalance").textContent =
+        "Số dư hiện tại: " +
+        Number(user.balance || 0).toLocaleString("vi-VN") +
+        "đ";
 
-    if (oldButton) {
-        oldButton.remove();
-    }
-
-    const button = document.createElement("button");
-
-    button.id = "buyWithBalance";
-    button.type = "button";
-    button.className = "btn-buy mt-3";
-    button.textContent = "💰 Mua bằng số dư";
-
-    button.onclick = confirmBuy;
 
     document
-        .querySelector("#paymentPopup .popup-box")
-        .appendChild(button);
+        .getElementById("paymentPopup")
+        .classList.add("show");
 }
+
+
+/* =========================================
+   MUA BẰNG SỐ DƯ
+========================================= */
 
 function confirmBuy() {
 
     const user = getUser();
 
+
     if (!user) {
-        alert("Bạn chưa đăng nhập.");
-        window.location.href = "login.html";
+
+        alert(
+            "Bạn chưa đăng nhập."
+        );
+
+        window.location.href =
+            "login.html";
+
         return;
     }
 
-    const balance = Number(user.balance || 0);
+
+    if (!selectedProduct || selectedPrice <= 0) {
+
+        alert(
+            "Không xác định được sản phẩm."
+        );
+
+        return;
+    }
+
+
+    const balance =
+        Number(user.balance || 0);
+
 
     if (balance < selectedPrice) {
 
         alert(
             "❌ Số dư không đủ!\n\n" +
+            "Sản phẩm: " +
+            selectedProduct +
+            "\n" +
             "Giá: " +
             selectedPrice.toLocaleString("vi-VN") +
             "đ\n" +
@@ -606,29 +1036,71 @@ function confirmBuy() {
         return;
     }
 
-    user.balance = balance - selectedPrice;
+
+    /* ================================
+       TRỪ TIỀN
+    ================================= */
+
+    user.balance =
+        balance - selectedPrice;
+
+
+    /* ================================
+       LƯU USER MỚI
+    ================================= */
+
+    saveUser(user);
+
+
+    /* ================================
+       LƯU ĐƠN HÀNG
+       GẮN VỚI USERNAME
+    ================================= */
+
+    let orders =
+        JSON.parse(
+            localStorage.getItem("khanhmod_orders") || "[]"
+        );
+
+
+    if (!Array.isArray(orders)) {
+        orders = [];
+    }
+
+
+    orders.unshift({
+
+        username: user.username,
+
+        name: user.name,
+
+        product: selectedProduct,
+
+        price: selectedPrice,
+
+        time: new Date().toLocaleString("vi-VN"),
+
+        status: "Đã thanh toán"
+
+    });
+
 
     localStorage.setItem(
-        "khanhmod_user",
-        JSON.stringify(user)
+        "khanhmod_orders",
+        JSON.stringify(orders)
     );
-// Lưu lịch sử đơn hàng
-const orders = JSON.parse(
-    localStorage.getItem("khanhmod_orders") || "[]"
-);
 
-orders.unshift({
-    product: selectedProduct,
-    price: selectedPrice,
-    time: new Date().toLocaleString("vi-VN"),
-    status: "Đã thanh toán"
-});
 
-localStorage.setItem(
-    "khanhmod_orders",
-    JSON.stringify(orders)
-);
+    /* ================================
+       ĐÓNG POPUP
+    ================================= */
+
     closePopup();
+
+
+    /* ================================
+       THÔNG BÁO
+    ================================= */
 
     alert(
         "✅ Mua hàng thành công!\n\n" +
@@ -642,33 +1114,58 @@ localStorage.setItem(
         user.balance.toLocaleString("vi-VN") +
         "đ"
     );
+
 }
 
+
+/* =========================================
+   ĐÓNG POPUP THANH TOÁN
+========================================= */
+
 function closePopup() {
+
     document
         .getElementById("paymentPopup")
         .classList.remove("show");
 }
 
+
+/* =========================================
+   ĐÓNG KHI CLICK RA NGOÀI
+========================================= */
+
 function closeOnOutside(event, popupId) {
 
     if (event.target.id === popupId) {
+
         document
             .getElementById(popupId)
             .classList.remove("show");
     }
 }
 
-document.addEventListener("keydown", function(event) {
 
-    if (event.key === "Escape") {
-        closeNapTien();
-        closePopup();
+/* =========================================
+   PHÍM ESC ĐỂ ĐÓNG POPUP
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Escape") {
+
+            closeNapTien();
+
+            closePopup();
+        }
+
     }
-
-});
+);
 
 </script>
 
+
 </body>
 </html>
+```
