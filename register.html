@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tạo tài khoản - KhánhMod</title>
 
-    <title>Tạo tài khoản - KhánhMod</title>
+<link rel="stylesheet" href="account.css">
 
-    <link rel="stylesheet" href="account.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
 <body>
@@ -29,321 +30,358 @@
 </nav>
 
 
-<main class="page">
+<div class="account-container">
 
-    <div class="container">
+    <div class="account-card">
 
-        <h1 class="title">
-            Tạo tài khoản
-        </h1>
+        <h1>📝 Tạo tài khoản</h1>
 
         <p class="subtitle">
             Tạo tài khoản để quản lý số dư và đơn hàng
         </p>
 
 
-        <div class="panel form-panel">
+        <form id="registerForm">
 
-            <label for="name">
-                Tên hiển thị
-            </label>
+            <label>Tên hiển thị</label>
 
             <input
-                id="name"
                 type="text"
-                placeholder="Ví dụ: Văn Khánh"
+                id="displayName"
+                placeholder="Nhập tên hiển thị"
+                required
             >
 
 
-            <label for="username">
-                Tên đăng nhập
-            </label>
+            <label>Tên tài khoản</label>
 
             <input
+                type="text"
                 id="username"
-                type="text"
-                placeholder="Ví dụ: khanhmod"
+                placeholder="Nhập tên tài khoản"
+                autocomplete="username"
+                required
             >
 
 
-            <label for="password">
-                Mật khẩu
-            </label>
+            <label>Mật khẩu</label>
 
             <input
+                type="password"
                 id="password"
-                type="password"
-                placeholder="Ít nhất 6 ký tự"
+                placeholder="Nhập mật khẩu"
+                autocomplete="new-password"
+                required
             >
 
 
-            <label for="password2">
-                Nhập lại mật khẩu
-            </label>
+            <label>Nhập lại mật khẩu</label>
 
             <input
-                id="password2"
                 type="password"
+                id="password2"
                 placeholder="Nhập lại mật khẩu"
+                autocomplete="new-password"
+                required
             >
-
-
-            <div id="error" class="error"></div>
-
-            <div id="success" class="success"></div>
 
 
             <button
-                type="button"
-                class="btn btn-primary full"
-                onclick="register()"
+                type="submit"
+                class="login-btn"
             >
                 Tạo tài khoản
             </button>
 
-
-            <p class="small">
-                Đã có tài khoản?
-                <a href="login.html">
-                    Đăng nhập
-                </a>
-            </p>
+        </form>
 
 
-            <div class="note">
-                Tài khoản hiện được lưu trên trình duyệt của thiết bị này.
-            </div>
+        <div
+            id="message"
+            style="
+                margin-top:15px;
+                text-align:center;
+                display:none;
+            "
+        ></div>
 
-        </div>
+
+        <p style="text-align:center;margin-top:20px;">
+            Đã có tài khoản?
+            <a href="login.html">Đăng nhập</a>
+        </p>
 
     </div>
 
-</main>
+</div>
 
 
 <script>
 
-function register() {
+const SUPABASE_URL =
+    "https://ubiduyjflmcaltxyjurt.supabase.co";
 
-    const nameInput =
-        document.getElementById("name");
+const SUPABASE_KEY =
+    "sb_publishable_TfYxyV5vkaaQzOQX55IOKw_-3jvRgNS";
 
-    const usernameInput =
-        document.getElementById("username");
-
-    const passwordInput =
-        document.getElementById("password");
-
-    const password2Input =
-        document.getElementById("password2");
-
-    const error =
-        document.getElementById("error");
-
-    const success =
-        document.getElementById("success");
-
-
-    const displayName =
-        nameInput.value.trim();
-
-    const username =
-        usernameInput.value.trim().toLowerCase();
-
-    const password =
-        passwordInput.value;
-
-    const password2 =
-        password2Input.value;
-
-
-    error.style.display = "none";
-    success.style.display = "none";
-
-
-    if (
-        !displayName ||
-        !username ||
-        !password ||
-        !password2
-    ) {
-
-        error.textContent =
-            "Vui lòng nhập đầy đủ thông tin.";
-
-        error.style.display = "block";
-
-        return;
-    }
-
-
-    if (username.length < 3) {
-
-        error.textContent =
-            "Tên đăng nhập phải có ít nhất 3 ký tự.";
-
-        error.style.display = "block";
-
-        return;
-    }
-
-
-    if (password.length < 6) {
-
-        error.textContent =
-            "Mật khẩu phải có ít nhất 6 ký tự.";
-
-        error.style.display = "block";
-
-        return;
-    }
-
-
-    if (password !== password2) {
-
-        error.textContent =
-            "Mật khẩu nhập lại không khớp.";
-
-        error.style.display = "block";
-
-        return;
-    }
-
-
-    /* ================================
-       LẤY DANH SÁCH TÀI KHOẢN
-    ================================= */
-
-    let users = JSON.parse(
-        localStorage.getItem("khanhmod_users") || "[]"
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
     );
 
 
-    /* ================================
-       CHUYỂN TÀI KHOẢN CŨ SANG DANH SÁCH
-    ================================= */
+const form =
+    document.getElementById(
+        "registerForm"
+    );
 
-    if (!Array.isArray(users)) {
-        users = [];
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+function showMessage(
+    text,
+    success
+) {
+
+    message.style.display = "block";
+
+    message.textContent = text;
+
+    if (success) {
+
+        message.style.color =
+            "#00ff99";
+
+    } else {
+
+        message.style.color =
+            "#ff5555";
+
     }
-
-
-    const oldUser = JSON.parse(
-        localStorage.getItem("khanhmod_user") || "null"
-    );
-
-
-    if (
-        oldUser &&
-        oldUser.username &&
-        users.length === 0
-    ) {
-
-        users.push(oldUser);
-
-        localStorage.setItem(
-            "khanhmod_users",
-            JSON.stringify(users)
-        );
-    }
-
-
-    /* ================================
-       KIỂM TRA TÀI KHOẢN ĐÃ TỒN TẠI
-    ================================= */
-
-    const exists = users.some(function(user) {
-
-        return String(user.username || "")
-            .toLowerCase() === username;
-
-    });
-
-
-    if (exists) {
-
-        error.textContent =
-            "Tên đăng nhập này đã tồn tại.";
-
-        error.style.display = "block";
-
-        return;
-    }
-
-
-    /* ================================
-       TẠO TÀI KHOẢN MỚI
-    ================================= */
-
-    const user = {
-
-        name: displayName,
-
-        username: username,
-
-        password: password,
-
-        balance: 0
-
-    };
-
-
-    users.push(user);
-
-
-    /* ================================
-       LƯU DANH SÁCH TÀI KHOẢN
-    ================================= */
-
-    localStorage.setItem(
-        "khanhmod_users",
-        JSON.stringify(users)
-    );
-
-
-    /* ================================
-       LƯU TÀI KHOẢN HIỆN TẠI
-       ĐỂ TƯƠNG THÍCH VỚI ACCOUNT
-    ================================= */
-
-    localStorage.setItem(
-        "khanhmod_user",
-        JSON.stringify(user)
-    );
-
-
-    /* ================================
-       CHƯA ĐĂNG NHẬP
-    ================================= */
-
-    localStorage.setItem(
-        "khanhmod_logged",
-        "0"
-    );
-
-
-    /* ================================
-       THÔNG BÁO THÀNH CÔNG
-    ================================= */
-
-    success.textContent =
-        "Tạo tài khoản thành công! Đang chuyển sang đăng nhập...";
-
-    success.style.display = "block";
-
-
-    /* ================================
-       CHUYỂN SANG TRANG ĐĂNG NHẬP
-    ================================= */
-
-    setTimeout(function() {
-
-        window.location.href =
-            "login.html";
-
-    }, 1000);
 
 }
+
+
+form.addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const displayName =
+            document
+                .getElementById(
+                    "displayName"
+                )
+                .value
+                .trim();
+
+
+        const username =
+            document
+                .getElementById(
+                    "username"
+                )
+                .value
+                .trim()
+                .toLowerCase();
+
+
+        const password =
+            document
+                .getElementById(
+                    "password"
+                )
+                .value;
+
+
+        const password2 =
+            document
+                .getElementById(
+                    "password2"
+                )
+                .value;
+
+
+        if (!displayName) {
+
+            showMessage(
+                "Vui lòng nhập tên hiển thị.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (!username) {
+
+            showMessage(
+                "Vui lòng nhập tên tài khoản.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (username.length < 3) {
+
+            showMessage(
+                "Tên tài khoản phải có ít nhất 3 ký tự.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (password.length < 6) {
+
+            showMessage(
+                "Mật khẩu phải có ít nhất 6 ký tự.",
+                false
+            );
+
+            return;
+        }
+
+
+        if (password !== password2) {
+
+            showMessage(
+                "Mật khẩu nhập lại không khớp.",
+                false
+            );
+
+            return;
+        }
+
+
+        showMessage(
+            "Đang tạo tài khoản...",
+            true
+        );
+
+
+        try {
+
+            /*
+             * Dùng username làm email nội bộ.
+             * Người dùng vẫn chỉ cần nhớ
+             * tên tài khoản và mật khẩu.
+             */
+
+            const email =
+                username +
+                "@khanhmod.local";
+
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password
+                });
+
+
+            if (error) {
+
+                showMessage(
+                    error.message,
+                    false
+                );
+
+                return;
+            }
+
+
+            if (
+                !data ||
+                !data.user
+            ) {
+
+                showMessage(
+                    "Không tạo được tài khoản.",
+                    false
+                );
+
+                return;
+            }
+
+
+            const userId =
+                data.user.id;
+
+
+            const {
+                error: profileError
+            } =
+                await supabaseClient
+                    .from("profiles")
+                    .insert({
+
+                        id: userId,
+
+                        username: username,
+
+                        display_name:
+                            displayName,
+
+                        balance: 0
+
+                    });
+
+
+            if (profileError) {
+
+                showMessage(
+                    "Tạo tài khoản thành công nhưng không tạo được hồ sơ: " +
+                    profileError.message,
+                    false
+                );
+
+                return;
+            }
+
+
+            showMessage(
+                "✅ Tạo tài khoản thành công! Đang chuyển sang đăng nhập...",
+                true
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "login.html";
+
+                },
+                1200
+            );
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showMessage(
+                "Đã xảy ra lỗi. Vui lòng thử lại.",
+                false
+            );
+
+        }
+
+    }
+);
 
 </script>
 
