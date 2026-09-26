@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Tạo tài khoản - KhánhMod</title>
 
 <link rel="stylesheet" href="account.css">
@@ -124,6 +125,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
     "sb_publishable_TfYxyV5vkaaQzOQX55IOKw_-3jvRgNS";
 
+
 const supabaseClient =
     window.supabase.createClient(
         SUPABASE_URL,
@@ -135,6 +137,7 @@ const form =
     document.getElementById(
         "registerForm"
     );
+
 
 const message =
     document.getElementById(
@@ -151,18 +154,10 @@ function showMessage(
 
     message.textContent = text;
 
-    if (success) {
-
-        message.style.color =
-            "#00ff99";
-
-    } else {
-
-        message.style.color =
-            "#ff5555";
-
-    }
-
+    message.style.color =
+        success
+        ? "#00ff99"
+        : "#ff5555";
 }
 
 
@@ -175,18 +170,14 @@ form.addEventListener(
 
         const displayName =
             document
-                .getElementById(
-                    "displayName"
-                )
+                .getElementById("displayName")
                 .value
                 .trim();
 
 
         const username =
             document
-                .getElementById(
-                    "username"
-                )
+                .getElementById("username")
                 .value
                 .trim()
                 .toLowerCase();
@@ -194,17 +185,13 @@ form.addEventListener(
 
         const password =
             document
-                .getElementById(
-                    "password"
-                )
+                .getElementById("password")
                 .value;
 
 
         const password2 =
             document
-                .getElementById(
-                    "password2"
-                )
+                .getElementById("password2")
                 .value;
 
 
@@ -219,21 +206,10 @@ form.addEventListener(
         }
 
 
-        if (!username) {
+        if (!/^[a-z0-9_]{3,20}$/.test(username)) {
 
             showMessage(
-                "Vui lòng nhập tên tài khoản.",
-                false
-            );
-
-            return;
-        }
-
-
-        if (username.length < 3) {
-
-            showMessage(
-                "Tên tài khoản phải có ít nhất 3 ký tự.",
+                "Tên tài khoản chỉ được dùng chữ không dấu, số và dấu _. Ví dụ: khanh123",
                 false
             );
 
@@ -272,29 +248,42 @@ form.addEventListener(
         try {
 
             /*
-             * Dùng username làm email nội bộ.
-             * Người dùng vẫn chỉ cần nhớ
-             * tên tài khoản và mật khẩu.
+             * Chuyển username thành email nội bộ.
+             * Người dùng không cần nhập email.
              */
 
             const email =
                 username +
-                "@khanhmod.local";
+                "@khanhmod.com";
 
 
-            const {
-                data,
-                error
-            } =
+            /*
+             * Tạo tài khoản Supabase
+             */
+
+            const result =
                 await supabaseClient.auth.signUp({
+
                     email: email,
+
                     password: password
+
                 });
+
+
+            const data =
+                result.data;
+
+            const error =
+                result.error;
 
 
             if (error) {
 
+                console.error(error);
+
                 showMessage(
+                    "Supabase: " +
                     error.message,
                     false
                 );
@@ -303,13 +292,10 @@ form.addEventListener(
             }
 
 
-            if (
-                !data ||
-                !data.user
-            ) {
+            if (!data || !data.user) {
 
                 showMessage(
-                    "Không tạo được tài khoản.",
+                    "Không nhận được thông tin tài khoản từ Supabase.",
                     false
                 );
 
@@ -317,34 +303,35 @@ form.addEventListener(
             }
 
 
-            const userId =
-                data.user.id;
+            /*
+             * Tạo hồ sơ người dùng
+             */
 
-
-            const {
-                error: profileError
-            } =
+            const profileResult =
                 await supabaseClient
                     .from("profiles")
                     .insert({
 
-                        id: userId,
+                        id: data.user.id,
 
                         username: username,
 
-                        display_name:
-                            displayName,
+                        display_name: displayName,
 
                         balance: 0
 
                     });
 
 
-            if (profileError) {
+            if (profileResult.error) {
+
+                console.error(
+                    profileResult.error
+                );
 
                 showMessage(
-                    "Tạo tài khoản thành công nhưng không tạo được hồ sơ: " +
-                    profileError.message,
+                    "Tài khoản Auth đã tạo nhưng hồ sơ bị lỗi: " +
+                    profileResult.error.message,
                     false
                 );
 
@@ -353,7 +340,7 @@ form.addEventListener(
 
 
             showMessage(
-                "✅ Tạo tài khoản thành công! Đang chuyển sang đăng nhập...",
+                "✅ Tạo tài khoản thành công!",
                 true
             );
 
@@ -368,13 +355,15 @@ form.addEventListener(
                 1200
             );
 
+        }
 
-        } catch (error) {
+        catch (error) {
 
             console.error(error);
 
             showMessage(
-                "Đã xảy ra lỗi. Vui lòng thử lại.",
+                "Lỗi kết nối Supabase: " +
+                error.message,
                 false
             );
 
