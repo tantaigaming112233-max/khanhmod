@@ -746,114 +746,130 @@ function submitTopupRequest() {
 
 function renderOrders() {
 
-    const box =
-        document.getElementById(
-            "orderHistory"
-        );
+```
+const box =
+    document.getElementById("orderHistory");
 
+if (!box) {
+    return;
+}
 
-    if (!box) {
+// Lấy tài khoản đang đăng nhập
+const user = getCurrentUser();
 
-        return;
-
-    }
-
-
-
-    const orders =
-        JSON.parse(
-            localStorage.getItem(
-                "khanhmod_orders"
-            ) || "[]"
-        );
-
-
-
-    if (
-        orders.length === 0
-    ) {
-
-        box.innerHTML =
-            '<p class="muted">Chưa có đơn hàng nào.</p>';
-
-        return;
-
-    }
-
-
+if (!user || !user.username) {
 
     box.innerHTML =
-        orders.map(
-            function(order) {
+        '<p class="muted">Không xác định được tài khoản.</p>';
 
-                return `
+    return;
+}
 
-                <div style="
-                    padding:15px;
-                    margin-bottom:12px;
-                    border:1px solid rgba(0,255,255,.25);
-                    border-radius:12px;
-                    background:rgba(255,255,255,.03);
-                ">
+// Lấy tất cả đơn hàng
+let allOrders = [];
 
+try {
 
-                    <div style="
-                        font-size:18px;
-                        font-weight:bold;
-                    ">
+    const data =
+        JSON.parse(
+            localStorage.getItem("khanhmod_orders") || "[]"
+        );
 
-                        🛍️ ${escapeHTML(
-                            order.product || ""
-                        )}
+    if (Array.isArray(data)) {
+        allOrders = data;
+    }
 
-                    </div>
+} catch (e) {
 
+    allOrders = [];
 
-                    <div style="margin-top:6px">
+}
 
-                        💰 Giá:
+// CHỈ LẤY ĐƠN HÀNG CỦA TÀI KHOẢN ĐANG ĐĂNG NHẬP
+const orders =
+    allOrders.filter(function(order) {
 
-                        <b>
+        return String(order.username || "").toLowerCase() ===
+               String(user.username || "").toLowerCase();
 
-                            ${Number(
-                                order.price || 0
-                            ).toLocaleString(
-                                "vi-VN"
-                            )}đ
-
-                        </b>
-
-                    </div>
+    });
 
 
-                    <div style="margin-top:6px">
+if (orders.length === 0) {
 
-                        🕐 ${escapeHTML(
-                            order.time || ""
-                        )}
+    box.innerHTML =
+        '<p class="muted">Chưa có đơn hàng nào.</p>';
 
-                    </div>
+    return;
 
-
-                    <div style="
-                        margin-top:8px;
-                        color:#00ff99;
-                        font-weight:bold;
-                    ">
-
-                        ✅ ${escapeHTML(
-                            order.status || ""
-                        )}
-
-                    </div>
+}
 
 
-                </div>
+box.innerHTML =
+    orders.map(function(order) {
 
-                `;
+        return `
 
-            }
-        ).join("");
+        <div style="
+            padding:15px;
+            margin-bottom:12px;
+            border:1px solid rgba(0,255,255,.25);
+            border-radius:12px;
+            background:rgba(255,255,255,.03);
+        ">
+
+            <div style="
+                font-size:18px;
+                font-weight:bold;
+            ">
+
+                🛍️ ${escapeHTML(
+                    order.product || ""
+                )}
+
+            </div>
+
+
+            <div style="margin-top:6px">
+
+                💰 Giá:
+
+                <b>
+                    ${Number(
+                        order.price || 0
+                    ).toLocaleString("vi-VN")}đ
+                </b>
+
+            </div>
+
+
+            <div style="margin-top:6px">
+
+                🕐 ${escapeHTML(
+                    order.time || ""
+                )}
+
+            </div>
+
+
+            <div style="
+                margin-top:8px;
+                color:#00ff99;
+                font-weight:bold;
+            ">
+
+                ✅ ${escapeHTML(
+                    order.status || "Đã thanh toán"
+                )}
+
+            </div>
+
+        </div>
+
+        `;
+
+    }).join("");
+```
 
 }
 
