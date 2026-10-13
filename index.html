@@ -6,6 +6,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KhánhMod Premium | Shop Online</title>
 <style>
+/* NỀN CYAN CHUYỂN ĐỘNG */
+body {
+  background-color: #02060b;
+  background-image:
+    radial-gradient(ellipse at 15% 20%,
+      #006b8c55 0%, transparent 38%),
+    radial-gradient(ellipse at 85% 65%,
+      #004a6b44 0%, transparent 40%);
+  background-size: 180% 180%;
+  animation: cyanBackground 12s ease-in-out infinite alternate;
+}
+
+@keyframes cyanBackground {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* VIỀN NEON CHUYỂN SÁNG */
+.product {
+  position: relative;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.product::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg, #00eaff, transparent 35%,
+    #006bff, transparent 75%, #00eaff
+  );
+  background-size: 250% 250%;
+  animation: neonBorder 5s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes neonBorder {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.product:hover {
+  transform: perspective(900px)
+    rotateX(4deg) rotateY(-4deg)
+    translateY(-10px) scale(1.02);
+  box-shadow:
+    0 0 18px #00d9ff55,
+    0 20px 45px #000b;
+}
+
+.product-art span {
+  animation: floating3D 3s ease-in-out infinite;
+}
+
+@keyframes floating3D {
+  0%, 100% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-10px) rotateY(12deg); }
+}
+
+.btn, .buy {
+  transition: transform .25s, box-shadow .25s;
+}
+
+.btn:hover, .buy:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 25px #00d9ff80;
+}
+
+/* TÔN TRỌNG CÀI ĐẶT GIẢM CHUYỂN ĐỘNG */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 :root {
   --bg: #03070b;
   --card: #09131c;
