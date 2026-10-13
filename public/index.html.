@@ -1,1 +1,472 @@
 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KhánhMod Premium | Shop Online</title>
+<style>
+/* NỀN CYAN CHUYỂN ĐỘNG */
+body {
+  background-color: #02060b;
+  background-image:
+    radial-gradient(ellipse at 15% 20%,
+      #006b8c55 0%, transparent 38%),
+    radial-gradient(ellipse at 85% 65%,
+      #004a6b44 0%, transparent 40%);
+  background-size: 180% 180%;
+  animation: cyanBackground 12s ease-in-out infinite alternate;
+}
+
+@keyframes cyanBackground {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* VIỀN NEON CHUYỂN SÁNG */
+.product {
+  position: relative;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.product::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg, #00eaff, transparent 35%,
+    #006bff, transparent 75%, #00eaff
+  );
+  background-size: 250% 250%;
+  animation: neonBorder 5s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes neonBorder {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.product:hover {
+  transform: perspective(900px)
+    rotateX(4deg) rotateY(-4deg)
+    translateY(-10px) scale(1.02);
+  box-shadow:
+    0 0 18px #00d9ff55,
+    0 20px 45px #000b;
+}
+
+.product-art span {
+  animation: floating3D 3s ease-in-out infinite;
+}
+
+@keyframes floating3D {
+  0%, 100% { transform: translateY(0) rotateY(0deg); }
+  50% { transform: translateY(-10px) rotateY(12deg); }
+}
+
+.btn, .buy {
+  transition: transform .25s, box-shadow .25s;
+}
+
+.btn:hover, .buy:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 25px #00d9ff80;
+}
+
+/* TÔN TRỌNG CÀI ĐẶT GIẢM CHUYỂN ĐỘNG */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+:root {
+  --bg: #03070b;
+  --card: #09131c;
+  --blue: #00d9ff;
+  --light: #a7f3ff;
+  --text: #f2fbff;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 50% 0%, #06364a 0%, transparent 48%),
+    var(--bg);
+  font-family: Arial, sans-serif;
+}
+a { color: inherit; text-decoration: none; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #03080df0;
+  border-bottom: 1px solid #087a9b;
+  backdrop-filter: blur(16px);
+}
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+.logo {
+  color: var(--blue);
+  font-size: 24px;
+  font-weight: 900;
+  text-shadow: 0 0 18px #00bfff80;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  font-size: 14px;
+}
+.nav-links a:hover { color: var(--blue); }
+
+.btn {
+  display: inline-block;
+  padding: 12px 20px;
+  border: 1px solid var(--blue);
+  border-radius: 12px;
+  color: #001018;
+  background: linear-gradient(135deg, #9af5ff, #00bfe9);
+  font-weight: 800;
+  box-shadow: 0 0 20px #00cfff30;
+  transition: .25s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 28px #00d9ff80;
+}
+.btn-outline {
+  color: var(--blue);
+  background: transparent;
+}
+
+.hero {
+  max-width: 1200px;
+  min-height: 390px;
+  margin: auto;
+  padding: 75px 24px;
+  display: flex;
+  align-items: center;
+}
+.hero-content { max-width: 680px; }
+.tag {
+  display: inline-block;
+  color: var(--light);
+  border: 1px solid #087e9e;
+  border-radius: 30px;
+  padding: 8px 14px;
+}
+h1 {
+  margin: 20px 0 12px;
+  font-size: clamp(42px, 8vw, 78px);
+  line-height: 1;
+  color: var(--blue);
+  text-shadow: 0 0 35px #00cfff70;
+}
+.hero p {
+  color: #c1d8e5;
+  line-height: 1.8;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+.features {
+  max-width: 1120px;
+  margin: 0 auto 65px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.feature {
+  padding: 20px;
+  border: 1px solid #123c50;
+  background: #08121bd9;
+  border-radius: 15px;
+  text-align: center;
+}
+.feature strong {
+  display: block;
+  color: var(--blue);
+  margin-bottom: 8px;
+}
+
+.products {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px 20px 80px;
+}
+.section-title {
+  color: var(--blue);
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.section-desc { color: #91a9b8; }
+
+.search {
+  width: 100%;
+  max-width: 420px;
+  padding: 13px 16px;
+  margin: 22px 0;
+  color: white;
+  background: #09131c;
+  border: 1px solid #17536a;
+  border-radius: 12px;
+  outline: none;
+}
+.search:focus { border-color: var(--blue); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+.product {
+  min-width: 0;
+  overflow: hidden;
+  padding: 15px;
+  border: 1px solid #12506a;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #102332, #050a10 70%);
+  box-shadow: 0 10px 30px #0008;
+  transition: transform .3s, border-color .3s, box-shadow .3s;
+  transform-style: preserve-3d;
+}
+.product:hover {
+  transform: perspective(900px) rotateX(3deg) rotateY(-3deg) translateY(-8px);
+  border-color: var(--blue);
+  box-shadow: 0 18px 38px #00bfff20;
+}
+.product-art {
+  height: 170px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #16475d;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle, #087b9a 0%, #092435 40%, #03080e 78%);
+}
+.product-art span {
+  font-size: 66px;
+  filter: drop-shadow(0 0 18px #00d9ff);
+  transform: translateZ(25px);
+}
+.product h3 { margin-bottom: 8px; }
+.product p {
+  min-height: 38px;
+  color: #a8bdca;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.price {
+  color: var(--blue);
+  font-size: 25px;
+  font-weight: 900;
+  margin: 18px 0;
+}
+.buy {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 13px;
+  background: linear-gradient(90deg, #00bde9, #8deeff);
+  color: #00131b;
+  font-weight: 900;
+}
+.buy:hover { filter: brightness(1.15); }
+
+.empty {
+  display: none;
+  color: #9eb5c5;
+  padding: 25px 0;
+}
+footer {
+  padding: 32px 20px;
+  border-top: 1px solid #124156;
+  text-align: center;
+  color: #9ab0bf;
+  line-height: 1.9;
+}
+footer strong { color: var(--blue); }
+
+@media (max-width: 760px) {
+  .nav { flex-wrap: wrap; }
+  .nav-links { gap: 14px; flex-wrap: wrap; }
+  .hero { min-height: 340px; padding: 55px 20px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .product { padding: 10px; }
+  .product-art { height: 125px; }
+  .product-art span { font-size: 48px; }
+  .price { font-size: 20px; }
+  .features { grid-template-columns: 1fr; }
+}
+@media (max-width: 420px) {
+  .grid { grid-template-columns: 1fr; }
+  .product-art { height: 180px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#home">⚡ KhánhMod</a>
+    <div class="nav-links">
+      <a href="#home">Trang chủ</a>
+      <a href="#products">Sản phẩm</a>
+      <a href="#contact">Liên hệ</a>
+      <a href="#products">🛒 <span id="cartCount">0</span></a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="tag">✦ SHOP BÁN HÀNG ONLINE ✦</span>
+      <h1>KHÁNHMOD</h1>
+      <h2>Uy tín · Chất lượng · Giá tốt</h2>
+      <p>
+        Khám phá sản phẩm và dịch vụ game với giao diện
+        công nghệ 3D xanh neon trên nền đen hiện đại.
+      </p>
+      <div class="hero-actions">
+        <a class="btn" href="#products">Khám phá ngay →</a>
+        <a class="btn btn-outline"
+           href="https://zalo.me/0398247095"
+           target="_blank" rel="noopener">Liên hệ Zalo</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <strong>🔒 Bảo mật</strong>
+      Thông tin rõ ràng
+    </div>
+    <div class="feature">
+      <strong>⚡ Nhanh chóng</strong>
+      Hỗ trợ khi cần
+    </div>
+    <div class="feature">
+      <strong>🎧 CSKH</strong>
+      Liên hệ trực tiếp
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <h2 class="section-title">✦ SẢN PHẨM NỔI BẬT</h2>
+    <p class="section-desc">
+      Chọn sản phẩm để xem thông tin và đặt hàng.
+    </p>
+
+    <input class="search" id="search"
+      type="search" placeholder="⌕ Tìm kiếm sản phẩm..."
+      aria-label="Tìm kiếm sản phẩm">
+
+    <div class="grid" id="productGrid">
+
+      <article class="product" data-name="Proxy KhánhMod">
+        <div class="product-art"><span>⬡</span></div>
+        <h3>Proxy KhánhMod</h3>
+        <p>Dịch vụ hỗ trợ game.</p>
+        <div class="price">99.000đ</div>
+        <button class="buy"
+          onclick="buyProduct('Proxy KhánhMod','99.000đ')">
+          🛒 Mua ngay
+        </button>
+      </article>
+
+      <article class="product" data-name="ModFile FF">
+        <div class="product-art"><span>🎯</span></div>
+        <h3>ModFile FF</h3>
+        <p>Thông tin và hỗ trợ sản phẩm Free Fire.</p>
+        <div class="price">99.000đ</div>
+        <button class="buy"
+          onclick="buyProduct('ModFile FF','99.000đ')">
+          🛒 Mua ngay
+        </button>
+      </article>
+
+      <article class="product" data-name="Chim FF">
+        <div class="product-art"><span>🐉</span></div>
+        <h3>Chim FF</h3>
+        <p>Thông tin chi tiết về sản phẩm.</p>
+        <div class="price">3.000.000đ</div>
+        <button class="buy"
+          onclick="buyProduct('Chim FF','3.000.000đ')">
+          🛒 Mua ngay
+        </button>
+      </article>
+
+    </div>
+    <p class="empty" id="empty">Không tìm thấy sản phẩm.</p>
+  </section>
+</main>
+
+<footer id="contact">
+  <strong>⚡ KhánhMod Premium</strong>
+  <div>Uy tín · Chất lượng · Giá tốt</div>
+  <div>Zalo: 0398247095</div>
+  <div>© 2026 KhánhMod. All rights reserved.</div>
+</footer>
+
+<script>
+let cartCount = 0;
+
+function buyProduct(name, price) {
+  const message = "Xin chào KhánhMod! Tôi muốn đặt hàng: "
+    + name + " - " + price;
+  const url = "https://zalo.me/0398247095?text="
+    + encodeURIComponent(message);
+
+  if (confirm("Đặt mua " + name + " với giá " + price
+      + " qua Zalo?")) {
+    cartCount++;
+    document.getElementById("cartCount").textContent = cartCount;
+    window.open(url, "_blank", "noopener");
+  }
+}
+
+document.getElementById("search").addEventListener("input", function() {
+  const keyword = this.value.toLowerCase().trim();
+  let found = 0;
+
+  document.querySelectorAll(".product").forEach(function(product) {
+    const match = product.dataset.name.toLowerCase().includes(keyword);
+    product.style.display = match ? "" : "none";
+    if (match) found++;
+  });
+
+  document.getElementById("empty").style.display =
+    found ? "none" : "block";
+});
+</script>
+
+</body>
+</html>
